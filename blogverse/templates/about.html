@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-align: center;
+        }
+        body {
+            animation: fadeIn 1s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        h1, h2, h5 {
+            color: #2C1C0C;
+            transition: transform 0.3s ease-in-out;
+        }
+        h1:hover, h2:hover {
+            transform: scale(1.05);
+        }
+        .container {
+            width: 90%;
+            margin: auto;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0px 0px 15px rgba(44, 28, 12, 0.3);
+            animation: slideIn 1s ease-in-out;
+        }
+        @keyframes slideIn {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        .stat-box {
+            background: #fafafa;
+            color: rgb(39, 18, 18);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(44, 28, 12, 0.5);
+            width: 30%;
+        }
+        .stat-box p{
+            color: #2C1C0C;
+        }
+        .team {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        .member {
+            text-align: center;
+            padding: 15px;
+            transition: transform 0.3s;
+            width: 200px;
+        }
+        .member img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            box-shadow: 0px 0px 10px rgba(44, 28, 12, 0.5);
+        }
+        .member:hover {
+            transform: scale(1.05);
+        }
+        .quote {
+            font-style: italic;
+            font-size: 20px;
+            margin-top: 20px;
+            color: #333;
+        }
+        .mission {
+            margin-top: 40px;
+            font-size: 18px;
+            color: #2C1C0C;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    {% extends 'base.html' %}
+    {% load static %}
+    {% block content %}
+    <div class="container">
+        <h1>Our Story</h1>
+        <p class="quote">"Blogging is a gateway to sharing knowledge, experiences, and creativity with the digital universe."</p>
+        <p>Blogverse was created to help individuals and businesses streamline their content creation and management.</p>
+    </div>
+    <div class="container stats">
+        <div class="stat-box">
+            <h2 class="count" data-target="200">0</h2>
+            <p>Published Blogs</p>
+        </div>
+        <div class="stat-box">
+            <h2 class="count" data-target="10000">0</h2>
+            <p>Engaged Readers</p>
+        </div>
+        <div class="stat-box">
+            <h2 class="count" data-target="500">0</h2>
+            <p>Contributing Writers</p>
+        </div>
+    </div>
+    <div class="container mission">
+        <h2>Our Mission</h2>
+        <p>At Blogverse, we aim to empower creators, inspire readers, and build a vibrant community that thrives on sharing valuable content.</p>
+    </div>
+    <div class="container">
+        <h1>Meet Our Blogverse Team</h1>
+        <div class="team">
+            <div class="member">
+                <img src="{% static 'images/loomba.jpg' %}" alt="Garima">
+                <h3>Garima Loomba</h3>
+            </div>
+            <div class="member">
+                <img src="{% static 'images/tanu.jpg' %}" alt="Taniya">
+                <h3>Taniya Tandon</h3>
+            </div>
+            <div class="member">
+                <img src="{% static 'images/chetanimage.jpg' %}" alt="Chetan">
+                <h3>Chetan Raj Goyal</h3>
+            </div>
+            <div class="member">
+                <img src="{% static 'images/kunal.jpg' %}" alt="Kunal">
+                <h3>Kunal Yadav</h3>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const counters = document.querySelectorAll(".count");
+            counters.forEach(counter => {
+                let target = +counter.getAttribute("data-target");
+                let count = 0;
+                let increment = target / 100;
+                function updateCount() {
+                    if (count < target) {
+                        count += increment;
+                        counter.innerText = Math.floor(count);
+                        setTimeout(updateCount, 30);
+                    } else {
+                        counter.innerText = target;
+                    }
+                }
+                updateCount();
+            });
+        });
+    </script>
+    {% endblock %}
+</body>
+</html>

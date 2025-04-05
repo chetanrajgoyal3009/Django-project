@@ -1,0 +1,311 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<style>
+    body {
+        background-image: url(./images/2.png);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
+        color: white;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
+    }
+
+    .postt {
+        background-color: #2C1C0C;
+        width: 70%;
+        height: 180px;
+        border-radius: 10px;
+        margin: 20px 20px 20px 230px;
+        box-shadow: 0px 4px 10px rgba(53, 30, 12, 0.878);
+
+    }
+
+    .postt button {
+        margin-right: 20px;
+    }
+
+    .post-input img {
+        height: 80px;
+        border-radius: 50%;
+    }
+
+    .post-input {
+        margin-top: 20px;
+        background-color: #2C1C0C;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 5px;
+        display: flex;
+        gap: 20px;
+
+    }
+
+    textarea {
+        width: 100%;
+        height: 60px;
+        border: none;
+        border-radius: 5px;
+        padding: 10px;
+        background-color: #ece2d5;
+        color: white;
+    }
+
+    textarea::placeholder {
+        color: #2C1C0C;
+        font-size: 18px;
+    }
+
+    button {
+        background-color: #4d3824;
+        color: #ece2d5;
+        border: 2px solid #ece2d5;
+        padding: 10px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        float: right;
+    }
+
+    button:hover {
+        background-color: #ece2d5;
+        border-color: #2C1C0C;
+        color: #2C1C0C;
+    }
+
+    .icons a {
+        text-decoration: none;
+        color: #ece2d5;
+    }
+
+    .icons i {
+        margin-left: 40px;
+        gap: 0px;
+        font-size: 18px;
+    }
+
+    .all-posts {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .post-container {
+            border: 1px solid #ccc;
+            width: 30%;
+            min-width: 320px;
+            border-radius: 10px;
+            overflow: hidden;
+            background: white;
+            padding: 15px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-details {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .profile-details img {
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+        }
+
+        .profile-details h2 {
+            margin: 0;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .profile-details h4 {
+            margin: 0;
+            font-size: 12px;
+            color: gray;
+        }
+
+        .profile-details a {
+            margin-left: auto;
+            padding: 5px 10px;
+            background: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 12px;
+        }
+
+        .post-image img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .post-title, .post-content {
+            padding: 10px 0;
+        }
+
+        .post-title h2 {
+            font-size: 18px;
+            margin: 0;
+            color: #222;
+        }
+
+        .post-content h2 {
+            font-size: 14px;
+            color: #555;
+            margin: 0;
+        }
+
+        .post-icons {
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+            gap: 10px;
+            border-top: 1px solid #ddd;
+        }
+
+        .post-icons img {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .Read-more {
+            display: flex;
+            justify-content: center;
+            padding: 10px;
+            float: right;
+        }
+
+        .Read-more a {
+            text-decoration: none;
+            background: black;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+</style>
+
+<body>
+    <main>
+        <div class="postt">
+            <div class="post-input">
+                <img src="" alt="">
+                <textarea placeholder="What's on your mind?"
+                    onclick="window.location.href='{% url 'write_blog' %}';"></textarea>
+            </div>
+            <div class="icons">
+                <a href="#"> <i class="fa fa-bookmark"></i></a>
+                <a href="#"> <i class="fa fa-paperclip"></i></a>
+                <a href="#"> <i class="fa fa-map-marker-alt"></i></a>
+                <button>Post</button>
+            </div>
+        </div>
+        <div class="all-posts">
+            {% for post in posts %}
+            <div class="post-container">
+                <div class="profile-details">
+                    <img src="{% static 'images/image.png' %}" alt="Profile Picture">
+                    <div>
+                        <h2>{{ post.author.username }}</h2>
+                        <h4>{{ post.created_at|date:"F d, Y, h:i A" }}</h4>
+                    </div>
+                    <a href="#">Follow</a>
+                </div>
+                <div class="post-image">
+                    {% if post.image %}
+                    <img src="{{ post.image.url }}" alt="Post Image">
+                    {% else %}
+                    <img src="{% static 'images/default.png' %}" alt="Default Image">
+                    {% endif %}
+                </div>
+                <div class="post-icons">
+                    <form action="{% url 'like_post' post.id %}" method="POST">
+                        {% csrf_token %}
+                        <button type="submit" style="border: none; background: none; cursor: pointer;">
+                            {% if post.id in liked_posts %}
+                                <img src="{% static 'images/heart-filled.png' %}" alt="Unlike">
+                            {% else %}
+                                <img src="{% static 'images/heart.png' %}" alt="Like">
+                            {% endif %}
+                        </button>
+                        <span>{{ post.likes.count }}</span>
+                    </form>
+                
+                    <img src="{% static 'images/chat.png' %}" alt="Comment">
+                </div>
+                <div class="post-title">
+                    <h2>{{ post.title }}</h2>
+                </div>
+                <div class="post-content">
+                    <h2>{{ post.content|truncatewords:30 }}</h2>
+                </div>
+                
+                <div class="Read-more">
+                    <a href="{% url 'blog_detail' post.id %}">READ MORE</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </main>
+
+
+    <script>
+        document.querySelectorAll(".like-btn").forEach(button => {
+            button.addEventListener("click", function () {
+                const postId = this.getAttribute("data-post-id");
+                const likeCount = document.getElementById(`like-count-${postId}`);
+                const likeIcon = this.querySelector(".like-icon");
+
+                fetch(`/like/${postId}/`, {
+                    method: "POST",
+                    headers: {
+                        "X-Requested-With": "XMLHttpRequest",
+                        "X-CSRFToken": "{{ csrf_token }}"
+                    }
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.likes !== undefined) {
+                            likeCount.innerText = data.likes;
+                            likeIcon.classList.toggle("liked", data.liked);
+                        }
+                    })
+                    .catch(error => console.error("Error:", error));
+            });
+        });
+    </script>
+</body>
+
+</html>
+{% endblock %}

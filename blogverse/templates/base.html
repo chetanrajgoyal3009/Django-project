@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="{% static 'js/like.js' %}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+
+
+</head>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 10px;
+    align-items: center;
+    background-color: #3b5168;
+    
+
+  }
+
+  .navbar a {
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    font-size: 17px;
+    font-family: "Audiowide", serif;
+
+  }
+
+  .logo img {
+    width: 80px;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .Links a {
+    margin-left: 20px;
+    padding: 10px;
+  }
+
+  .Links a:hover {
+    background-color: #68829e6a;
+    padding: 10px;
+    border-radius: 5%;
+    box-sizing: border-box;
+    transition: all 0.3s ease-in-out;
+
+
+  }
+
+  .getstarted a {
+    margin-right: 20px;
+    border: 1px solid rgb(255, 255, 255);
+    padding: 10px 30px 10px 30px;
+    border-radius: 6%;
+    background-color: aqua;
+    color: black;
+  }
+
+  .getstarted a:hover {
+    background-color: rgb(255, 255, 255);
+    color: black;
+    transition: all 0.3s ease-in-out;
+    scale: 1.1;
+  }
+
+  a {
+    text-decoration: none;
+  }
+</style>
+
+<body>
+  <div class="navbar">
+
+    <div class="logo">
+      <img src="{% static 'images/bloglogo.png' %}" alt="logo">
+      <a href="{% url 'landing' %}">BLOGVERSE</a>
+    </div>
+
+    <div class="Links">
+      <a href="{% url 'landing' %}">Home</a>
+      <a href="">Categories</a>
+      <a href="{% url 'write_blog' %}">Write A Blog</a>
+      <a href="{% url 'blog_list' %}">Blog</a>
+      <a href="{% url 'about' %}">About</a>
+
+    </div>
+    <div class="getstarted">
+      <a href="{% url 'login' %}">Login</a>
+    </div>
+
+  </div>
+  <div class="main">
+    {% block content %}
+    {% endblock content %}
+  </div>
+  </div>
+  </div>
+  <script>     function toggleMenu() {
+      document.querySelector('#profile').classList.toggle('open-close');
+    }
+  </script>
+</body>
+
+</html>
