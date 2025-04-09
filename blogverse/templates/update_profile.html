@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <title>Update Profile</title>
+
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body { 
+            background-attachment: fixed;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 30px;
+            width: 100%;
+            max-width: 600px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            backdrop-filter: blur(10px);
+            animation: fadeIn 1s ease-in-out;
+            line-height: normal;
+            z-index: auto;
+            margin: auto;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #222;
+            margin-bottom: 20px;
+            font-weight: 600;
+            font-size: 32px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        label {
+            display: block;
+            text-align: left;
+            font-weight: 500;
+            margin-top: 10px;
+            color: #000000;
+            font-size: 18px;
+            width: 100%;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            max-width: 570px;
+            padding: 15px;
+            margin: 4px;
+            border: none;
+            background-color: transparent;
+            color: #222;
+            font-size: 16px;
+            text-align: left;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:hover,
+        select:hover,
+        textarea:hover {
+            border-bottom: 2px solid #800000;
+        }
+
+        input:focus {
+            background-color: transparent;
+        }
+
+        button {
+            background-color: #ad1f1f;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            max-width: 400px;
+            margin-top: 10px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        button:hover {
+            background-color: #c54545;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .btn-back {
+            display: inline-block;
+            background-color: #ad1f1f;
+            color: white;
+            padding: 12px;
+            border-radius: 8px;
+            text-decoration: none;
+            width: 100%;
+            max-width: 380px;
+            text-align: center;
+            margin-top: 10px;
+            transition: all 0.3s ease-in-out; 
+        
+        }
+
+        .btn-back:hover {
+            background-color: #c54545;
+            transform: scale(1.05);
+        }
+
+        input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: rgb(128, 0, 0);
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        input[type="checkbox"]:hover {
+            transform: scale(1.1);
+        }
+
+        a {
+            color: #ad0d0d;
+            /* Purple theme color */
+            font-weight: 500;
+            text-decoration: none;
+            transition: color 0.3s ease-in-out;
+        }
+
+        a:hover {
+            color: #820000;
+            /* Darker purple */
+            text-decoration: underline;
+        }
+
+        .clear-checkbox-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            /* Adds spacing between checkbox and label */
+            margin-top: 5px;
+        }
+
+
+        /* Responsive Design */
+        @media (max-width: 480px) {
+            .container {
+                width: 100%;
+                padding: 20px;
+            }
+
+            input,
+            select,
+            textarea {
+                font-size: 14px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    {%extends 'base.html'%}
+     {%block content%}
+    <div class="container">
+        <h2>Update Profile</h2>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <label for="name" class="name-label">Name:</label>
+            {{ form.name }}
+
+
+            <label for="profession" class="profession-label">Profession:</label>
+            {{ form.profession }}
+
+            <label for="gender" class="gender-label">Gender:</label>
+            {{ form.gender }}
+
+            <label for="birthdate" class="birthdate-label">Birthdate:</label>
+            {{ form.birthdate }}
+
+            <label for="address" class="address-label">Address:</label>
+            {{ form.address }}
+
+            <label for="email" class="email-label">Email:</label>
+            {{ form.email }}
+
+            <label for="phone" class="phone-label">Phone:</label>
+            {{ form.phone }}
+
+
+            <label for="profile_image" class="profile-image-label">Profile Image:</label>
+            {{ form.profile_image }}
+            {{ form.profile_image.clear }}
+
+
+            <label for="cover_photo" class="cover-photo-label">Cover Photo:</label>
+            {{ form.cover_photo }} 
+
+            <button type="submit">Save Changes</button>
+        </form>
+
+        <a href="{% url 'profile_view' %}" class="btn-back">Back to Profile</a>
+    </div>
+    {%endblock%}
+</body>
+
+</html>

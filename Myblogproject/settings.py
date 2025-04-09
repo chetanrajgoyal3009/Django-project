@@ -129,6 +129,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-# Required for development mode
-DEBUG = True  # Ensure DEBUG is True in development
+
+# # Required for development mode
+# DEBUG = True # Ensure DEBUG is True in development
 

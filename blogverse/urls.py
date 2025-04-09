@@ -7,7 +7,8 @@ urlpatterns = [
     path('landing/', views.landing, name='landing'),  # Changed 'Landing' to lowercase
     path('login/', views.login, name='login'),
     path('write/', views.write_blog, name='write_blog'),
-    path('profile/', views.profile, name='profile'),
+    path('profile/', views.profile_view, name='profile_view'),
+    path('profile/update/', views.update_profile, name='update_profile'),
     # Blog functionality
     path('blog/', views.blog_list, name='blog_list'),  # Show all blog posts
     path('blog/<int:post_id>/', views.blog_detail, name='blog_detail'),  # View a single blog post

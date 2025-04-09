@@ -1,65 +1,65 @@
-<!DOCTYPE html>
-<html lang="en">
+  <!DOCTYPE html>
+  <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-</head>
-<style>
-    * {
-        margin: 0;
-        color: #2C1C0C;
-        text-align: center;
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Document</title>
+      <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+  <style>
+      * {
+          margin: 0;
+          color: #2C1C0C;
+          text-align: center;
 
-    }
+      }
 
-    body {
-        background-image: url(./images/2.png);
-        background-size: cover;
-        background-attachment: fixed;
-        background-repeat: no-repeat;
-        font-family: "Audiowide", serif;
-    }
+      body {
+          background-image: url(./images/2.png);
+          background-size: cover;
+          background-attachment: fixed;
+          background-repeat: no-repeat;
+          font-family: "Audiowide", serif;
+      }
 
-    .carasole {
-        border: 2px solid black;
-        width: auto;
-        height: 680px;
-    }
-</style>
+      .carasole {
+          border: 2px solid black;
+          width: auto;
+          height: 680px;
+      }
+  </style>
 
-<body>
-    {% extends 'base.html' %}
-    {% load static %}
-    {% block content %}
-    <div class="carasole">
-        <center>
-            <h1>homepage</h1>
-        </center>
-    </div>
-    <div class="snap-x ...">
-        <div class="snap-center">
-          <img src="{% static 'images/1.png' %}" />
-        </div>
-        <div class="snap-center">
-          <img src="{% static 'images/logo.png' %}" />
-        </div>
-        <div class="snap-center ...">
-          <img src="/img/vacation-03.jpg" />
-        </div>
-        <div class="snap-center ...">
-          <img src="/img/vacation-04.jpg" />
-        </div>
-        <div class="snap-center ...">
-          <img src="/img/vacation-05.jpg" />
-        </div>
-        <div class="snap-center ...">
-          <img src="/img/vacation-06.jpg" />
-        </div>
+  <body>
+      {% extends 'base.html' %}
+      {% load static %}
+      {% block content %}
+      <div class="carasole">
+          <center>
+              <h1>homepage</h1>
+          </center>
       </div>
-    {% endblock %}
-</body>
+      <div class="snap-x ...">
+          <div class="snap-center">
+            <img src="{% static 'images/1.png' %}" />
+          </div>
+          <div class="snap-center">
+            <img src="{% static 'images/logo.png' %}" />
+          </div>
+          <div class="snap-center ...">
+            <img src="/img/vacation-03.jpg" />
+          </div>
+          <div class="snap-center ...">
+            <img src="/img/vacation-04.jpg" />
+          </div>
+          <div class="snap-center ...">
+            <img src="/img/vacation-05.jpg" />
+          </div>
+          <div class="snap-center ...">
+            <img src="/img/vacation-06.jpg" />
+          </div>
+        </div>
+      {% endblock %}
+  </body>
 
-</html>
+  </html>

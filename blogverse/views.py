@@ -1,9 +1,9 @@
 from django.shortcuts import render ,get_object_or_404 ,redirect
 from django.contrib.auth.decorators import login_required
-from .models import BlogPost
-from .forms import BlogPostForm
-from .models import BlogPost, Like
+from .forms import BlogPostForm,ProfileForm
+from .models import BlogPost, Profile, Like
 from django.http import JsonResponse
+from datetime import date
 
 
 
@@ -18,8 +18,6 @@ def landing(request):
 def login(request):
     return render(request,'login.html')
 
-def profile(request):
-    return render(request,'profile.html')
 def blog_list(request):
     posts = BlogPost.objects.all().order_by('-created_at')  # Get all posts sorted by date
     return render(request, 'Blog.html', {'posts': posts})
@@ -33,9 +31,9 @@ def write_blog(request):
         form = BlogPostForm(request.POST, request.FILES)
         if form.is_valid():
             blog_post = form.save(commit=False)
-            blog_post.author = request.user  # Assign logged-in user as author
+            blog_post.user = request.user  # Fixed field name
             blog_post.save()
-            return redirect('blog_list')  # Redirect to blog list after posting
+            return redirect('blog_list')
     else:
         form = BlogPostForm()
 
@@ -58,6 +56,31 @@ def post_detail(request, post_id):
     like_count = post.likes.count()
     return render(request, 'post_detail.html', {'post': post, 'like_count': like_count})
 
+
+
+
+@login_required
+def profile_view(request):
+    profile, created = Profile.objects.get_or_create(
+        user=request.user,
+        defaults={'birthdate': date(2000, 1, 1)}  # or date.today(), anything valid
+    )
+    blogs = BlogPost.objects.filter(user=request.user)
+    return render(request, 'profile.html', {'profile': profile, 'blogs': blogs})
+
+
+
+@login_required
+def update_profile(request):
+    profile = get_object_or_404(Profile, user=request.user)
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, request.FILES, instance=profile)
+        if form.is_valid():
+            form.save()
+            return redirect('profile_view')
+    else:
+        form = ProfileForm(instance=profile)
+    return render(request, 'update_profile.html', {'form': form})
 
 
 
