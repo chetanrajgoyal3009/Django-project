@@ -4,17 +4,23 @@
 {% block content %}
 <!DOCTYPE html>
 <html lang="en">
+    
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BLOGVERSE</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
 
     <style>
         h2 {
-            font-family: 'headings';
             text-align: center;
             letter-spacing: 2px;
+            font-size: 20px;
+            color: #615fff;
+            font-family: ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+
         }
 
         body {
@@ -22,8 +28,8 @@
             background-size: cover;
             background-attachment: fixed;
             background-blend-mode: darken;
-            color: #ece2d5;
-            font-family: 'Normative Pro Bold', sans-serif;
+            font-family: ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+
         }
 
         .close {
@@ -44,37 +50,32 @@
         }
 
         .inputs {
-            border: 0.5px solid #ece2d5;
+            /* border: 2px solid #615fff; */
             padding: 8px 10px;
             width: 100%;
             height: 30px;
-            background-color: #2c1c0c3e;
-            border-bottom: 0.5px solid #ece2d5;
-            font-family: 'mono';
+            background-color: rgb(238, 237, 237);
             font-size: 1.01rem;
-            color: 2C1C0C;
+            color: #1b1728;
             border-radius: 5px;
         }
 
         #titleInput {
             height: 50px;
-            font-family: 'headings';
             font-size: 1.2rem;
         }
 
         .inputs:focus {
             outline: none;
-            color: #ece2d5;
+            color: black;
         }
 
         input[type="submit"] {
-            font-family: 'mono';
-            background-color: #2C1C0C;
+            background-color: #615fff;
             color: #ece2d5;
-            border: 1px solid #ece2d5;
             width: 100px;
             height: 40px;
-            box-shadow: 0 0 8px #2C1C0C;
+            box-shadow: 0 0 8px #615fff;
             position: absolute;
             right: 25px;
             bottom: 20px;
@@ -97,9 +98,10 @@
             margin-top: 60px;
             max-width: 1000px;
             min-height: 620px;
-            box-shadow: 0 0 8px #2C1C0C;
+            box-shadow: 0 0 8px #838383;
             position: relative;
-            background-color: #2c1c0cd5;
+            border-radius: 15px;
+            background-color: #282734fd;
             padding: 10px 30px;
         }
 
@@ -115,13 +117,12 @@
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            background-color: #2C1C0C;
+            background-color: #615fff;
             color: #ece2d5;
             padding: 10px 15px;
-            border: 1px solid #ece2d5;
+            /* border: 1px solid #ece2d5; */
             cursor: pointer;
             border-radius: 5px;
-            font-family: 'Mono';
         }
 
         #fileInput {
@@ -137,34 +138,47 @@
 
 <body>
 
-    <div class="masterContainer">
-        <a href="{% url 'blog_list' %}">
-            <button class="close">
-                <img src="{% static 'images/close.png' %}" alt="Close">
-            </button>
-        </a>
+    <div class="relative isolate bg-white px-6 py-24 sm:py-32 lg:px-8">
+
+        <!-- ✨ BACKGROUND SHAPE -->
+        <div class="absolute inset-x-0 -top-3 -z-10 transform-gpu overflow-hidden px-36 blur-3xl" aria-hidden="true">
+            <div class="mx-auto aspect-1155/678 w-[72.1875rem] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30"
+                style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)">
+            </div>
+        </div>
     
-        <h2>Create Post</h2>
+        <!-- ✏️ ORIGINAL CONTENT STARTS HERE -->
+        <div class="masterContainer">
+            <a href="{% url 'blog_list' %}">
+                <button class="close">
+                    <img src="{% static 'images/cross.png' %}" alt="Close">
+                </button>
+            </a>
     
-        <section class="form">
-            <form action="{% url 'write_blog' %}" method="POST" enctype="multipart/form-data">
-                {% csrf_token %}
-                <div>
-                    <input type="text" name="title" class="inputs" id="titleInput" placeholder="Give it a heading" required>
-                </div>
-                <div>
-                    <textarea name="content" class="inputs" id="blog" placeholder="Write your blog..." required></textarea>
-                </div>
-                <div>
-                    <label for="fileInput" class="custom-file-upload">
-                        <span id="fileLabel">Choose an image</span>
-                    </label>
-                    <input type="file" id="fileInput" name="image" accept="image/*">
-                </div>
-                <input type="submit" value="Post">
-            </form>
-        </section>
+            <h2><b>Create Post</b></h2>
+    
+            <section class="form">
+                <form action="{% url 'write_blog' %}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div>
+                        <input type="text" name="title" class="inputs" id="titleInput" placeholder="Give it a heading" required>
+                    </div>
+                    <div>
+                        <textarea name="content" class="inputs" id="blog" placeholder="Write your blog..." required></textarea>
+                    </div>
+                    <div>
+                        <label for="fileInput" class="custom-file-upload">
+                            <span id="fileLabel" style="font-weight:600;">Choose an image</span>
+                        </label>
+                        <input type="file" id="fileInput" name="image" accept="image/*">
+                    </div>
+                    <input type="submit" value="Post" style="font-weight:600;">
+                </form>
+            </section>
+        </div>
+        <!-- 🔚 ORIGINAL CONTENT ENDS -->
     </div>
+    
     
     <script>
         document.getElementById("fileInput").addEventListener("change", function () {
