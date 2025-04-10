@@ -15,7 +15,7 @@
             padding: 0;
         }
 
-        body { 
+        body {
             background-attachment: fixed;
         }
 
@@ -115,8 +115,7 @@
             max-width: 380px;
             text-align: center;
             margin-top: 10px;
-            transition: all 0.3s ease-in-out; 
-        
+            transition: all 0.3s ease-in-out;
         }
 
         .btn-back:hover {
@@ -165,6 +164,8 @@
             .container {
                 width: 100%;
                 padding: 20px;
+                max-width: 200px;
+                font-size: 10px;
             }
 
             input,
@@ -172,6 +173,13 @@
             textarea {
                 font-size: 14px;
             }
+
+            input:hover,
+            select:hover,
+            textarea:hover {
+                border-bottom: 2px solid #800000;
+            }
+
         }
 
         /* Animations */
@@ -191,7 +199,7 @@
 
 <body>
     {%extends 'base.html'%}
-     {%block content%}
+    {%block content%}
     <div class="container">
         <h2>Update Profile</h2>
         <form method="POST" enctype="multipart/form-data">
@@ -226,7 +234,7 @@
 
 
             <label for="cover_photo" class="cover-photo-label">Cover Photo:</label>
-            {{ form.cover_photo }} 
+            {{ form.cover_photo }}
 
             <button type="submit">Save Changes</button>
         </form>

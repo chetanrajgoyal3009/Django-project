@@ -14,7 +14,7 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-           
+
             color: #2C1C0C;
             line-height: 1.6;
             animation: fadeIn 3s ease-in-out;
@@ -29,20 +29,41 @@
                 opacity: 7;
             }
         }
-        h1{
-                font-weight: 900;
-                font-size: 30px;
-                color: #2C1C0C;
+
+        h1,
+        h2 {
+            font-weight: 900;
+            font-size: 30px;
+            color: #2C1C0C;
             text-align: center;
             margin-bottom: 10px;
-            }
+        }
 
-        h2,
         h3,
         h5 {
             color: #2C1C0C;
             text-align: center;
             margin-bottom: 10px;
+        }
+
+
+        .mission {
+            display: grid;
+            grid-template-columns: 600px auto;
+            align-items: center;
+            margin: 40px auto;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.95);
+            text-align: center;
+
+            margin-top: 0%;
+            padding-top: 0px;
+
+            img {
+                width: 400px;
+                height: 400px;
+                animation: slideIn 2s ease-in-out;
+            }
         }
 
         .container {
@@ -52,9 +73,7 @@
             padding: 40px;
             background: rgba(255, 255, 255, 0.95);
             text-align: center;
-            box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.1);
             animation: slideIn 1s ease-in-out;
-            
         }
 
         @keyframes slideIn {
@@ -90,7 +109,6 @@
             border-radius: 15px;
             width: 30%;
             min-width: 250px;
-            /* box-shadow: 0px 5px 15px rgba(44, 28, 12, 0.1); */
             transition: transform 0.3s ease;
         }
 
@@ -101,6 +119,7 @@
         .stat-box h2 {
             font-size: 2.5rem;
             color: #9c4444;
+            font-weight: 500;
         }
 
         .stat-box p {
@@ -109,19 +128,6 @@
             text-align: center;
             font-weight: bolder;
         }
-
-        .mission {
-            background: white;
-            padding: 30px;
-            margin-top: 40px;
-            text-align: center;
-            h2{
-                font-size: 25px;
-                font-weight:900;
-            }
-            
-        }
-
 
         .team {
             display: flex;
@@ -149,6 +155,7 @@
             box-shadow: 0 4px 10px rgba(26, 25, 25, 0.2);
             margin-bottom: 15px;
             margin-left: 20px;
+            transition: slide-in-left 3s ease-in-out;
         }
 
         .member:hover {
@@ -179,50 +186,74 @@
             universe."</h3>
         <p>Blogverse was created to help individuals and businesses streamline their content creation and management.
             Our platform brings together passionate writers and curious readers to form a dynamic and collaborative
-            online space.</p>
+            online space."What began as a passion project by a group of enthusiastic storytellers has now grown into a
+            trusted platform
+            where creativity, authenticity, and community come first. From beginners to seasoned bloggers, Blogverse is
+            designed to support everyone in crafting meaningful content that resonates.We believe that every voice has
+            the power to inspire, educate, and connect — and Blogverse is the space where
+            those voices are heard and celebrated.</p>
+        <br>
+
+        <div class="stats">
+            <div class="stat-box">
+                <h2 class="count" data-target="200">0</h2>
+                <p>Published Blogs</p>
+            </div>
+            <div class="stat-box">
+                <h2 class="count" data-target="10000">0</h2>
+                <p>Engaged Readers</p>
+            </div>
+            <div class="stat-box">
+                <h2 class="count" data-target="500">0</h2>
+                <p>Contributing Writers</p>
+            </div>
+        </div>
+        <br>
 
 
-   <div class="stats">
-        <div class="stat-box">
-            <h2 class="count" data-target="200">0</h2>
-            <p>Published Blogs</p>
+        <div class="mission">
+            <div>
+                <h1>Our Mission</h1>
+                <p>At Blogverse, we aim to empower creators, inspire readers, and build a vibrant community that thrives
+                    on
+                    sharing valuable content.
+                    We are committed to making blogging accessible, engaging, and rewarding by offering intuitive tools,
+                    thoughtful support, and a platform that evolves with the needs of our users.
+                </p>
+            </div>
+            <div>
+                <img src="https://img.freepik.com/free-vector/staff-management-perspective-definition-target-orientation-teamwork-organization-business-coach-company-executive-personnel-cartoon-characters_335657-2967.jpg?semt=ais_country_boost&w=740"
+                    alt="">
+            </div>
         </div>
-        <div class="stat-box">
-            <h2 class="count" data-target="10000">0</h2>
-            <p>Engaged Readers</p>
-        </div>
-        <div class="stat-box">
-            <h2 class="count" data-target="500">0</h2>
-            <p>Contributing Writers</p>
-        </div>
-    </div>
-
- 
-        <h2>Our Mission</h2>
-        <p>At Blogverse, we aim to empower creators, inspire readers, and build a vibrant community that thrives on
-            sharing valuable content.</p>
 
 
         <h1>Meet Our Blogverse Team</h1>
-       <div class="team">
+        <div class="team">
             <div class="member">
                 <img src="{% static 'images/loomba.jpg' %}" alt="Garima">
                 <h3>Garima Loomba</h3>
+                <p>UI Developer & Backend Developer</p>
             </div>
             <div class="member">
                 <img src="{% static 'images/tanu.jpg' %}" alt="Taniya">
                 <h3>Taniya Tandon</h3>
+                <p>UI Developer & Backend Developer</p>
             </div>
             <div class="member">
                 <img src="{% static 'images/chetanimage.jpg' %}" alt="Chetan">
                 <h3>Chetan Raj Goyal</h3>
+                <p>UI Developer & Backend Developer</p>
+
             </div>
             <div class="member">
                 <img src="{% static 'images/kunal.jpg' %}" alt="Kunal">
                 <h3>Kunal Yadav</h3>
+
+
             </div>
         </div>
-  </div>
+    </div>
 
 
     <script>
