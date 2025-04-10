@@ -231,6 +231,12 @@
                 <button>Post</button>
             </div>
         </div>
+        <form method="GET" action="{% url 'blog_list' %}" class="hidden lg:flex">
+            <input type="text" name="q" placeholder="Search blogs..." value="{{ query }}"
+              class="border-2 border-red-500 text-red-500 px-3 py-1 rounded-md w-64 focus:outline-none focus:ring-2 focus:ring-red-400">
+            <button type="submit"
+              class="ml-2 bg-[#4d3824] text-white px-4 py-1 rounded hover:bg-[#362819] transition">Search</button>
+          </form>
         <div class="all-posts">
             {% for post in posts %}
             <div class="post-container">
