@@ -14,7 +14,7 @@
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
             /* text-align: center; */
-            padding: 20px;
+            padding: 0px;
             
         }
         .pricing-section {
@@ -237,6 +237,7 @@ body, html {
     display: flex;
     transition: background-color 1s ease-in-out;
     align-items: center;
+    margin-top: 2px;
 }
 
 h1 {
@@ -250,7 +251,7 @@ h3 {
     margin-bottom: 20px;
 }
 
-button {
+#blog {
     padding: 12px 24px;
     margin-top: 20px;
     margin-left: 0px;
@@ -267,7 +268,7 @@ button {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-button:hover {
+#blog:hover {
     background-color: #ff7e5f;
     color: white;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -394,7 +395,7 @@ button:hover {
 } */
 
 /* CTA Button */
-.cta-button {
+#create {
     background: #2c3e50;
     color: white;
     font-size: 1rem;
@@ -406,7 +407,7 @@ button:hover {
     margin-top: 20px;
 }
 
-.cta-button:hover {
+#create {
     background: #1a252f;
     transform: scale(1.1);
 }
@@ -657,7 +658,7 @@ button:hover {
           <!-- Main Content -->
           <h1>Publish your passions, your way</h1>
           <h3>Create a unique and beautiful blog easily.</h3>
-          <button>CREATE YOUR BLOG</button>
+          <button id="blog">CREATE YOUR BLOG</button>
       
           <!-- Images -->
           <img id="bgImage" class="background-img" src="{% static 'images/1st.png' %}" alt="oops image not found"  >
@@ -920,7 +921,7 @@ button:hover {
             you’re in good company on Blogger. Sign up to discover why millions of people 
             have published their passions here.
         </p>
-        <button class="cta-button">CREATE YOUR BLOG</button>
+        <button class="cta-button" id="create">CREATE YOUR BLOG</button>
     
         <!-- Animated Blogger Markers -->
         <div class="blogger-markers" style="background-image: ;">
