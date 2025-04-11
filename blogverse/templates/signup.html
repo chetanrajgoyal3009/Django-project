@@ -1,0 +1,201 @@
+{% extends 'base.html' %}
+{% block title_block %}Registration Page{% endblock %}
+
+{% block content %}
+<style>
+  .fade-slide-in {
+    animation: fadeSlideIn 0.8s ease-in-out;
+  }
+
+  @keyframes fadeSlideIn {
+    0% {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .container-box {
+    display: flex;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+    background: #f2f2f2;
+    padding: 50px 20px;
+  }
+
+  .register-wrapper {
+    display: flex;
+    max-width: 1000px;
+    width: 100%;
+    background: white;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    overflow: hidden;
+  }
+
+  .left-section {
+    flex: 1;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    color: white;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .left-section h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+  }
+
+  .left-section p {
+    font-size: 18px;
+    line-height: 1.6;
+  }
+
+  .right-section {
+    flex: 1;
+    padding: 40px;
+    background: #fff;
+  }
+
+  .right-section h3 {
+    font-size: 28px;
+    margin-bottom: 30px;
+    text-align: center;
+    color: #333;
+  }
+
+  form input {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+  }
+
+  form input[type="submit"] {
+    background: linear-gradient(to right, #1e3c72, #2a5298);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  form input[type="submit"]:hover {
+    background: linear-gradient(to right, #17305e, #244980);
+  }
+
+  .right-section p a {
+    color: #7c5cf4;
+    text-decoration: none;
+    font-weight: 500;
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .alert {
+    margin-top: 15px;
+    color: #8a0000;
+    background: #ffeaea;
+    padding: 12px;
+    border-radius: 6px;
+  }
+  @keyframes fadeIn {
+            0% {opacity: 0;}
+            100% {opacity: 1;}
+        }
+
+        @keyframes slideInLeft {
+            from {transform: translateX(-50%); opacity: 0;}
+            to {transform: translateX(0); opacity: 1;}
+        }
+
+        @media (max-width: 768px) {
+            .left-section {
+                flex-direction: column;
+            }
+            .left-section{
+                display: none;
+            }
+        }
+
+  @media (max-width: 768px) {
+    .register-wrapper {
+      flex-direction: column;
+    }
+
+    .left-section, .right-section {
+      padding: 30px;
+      text-align: center;
+    }
+
+    .left-section h2 {
+      font-size: 28px;
+    }
+  }
+</style>
+
+<div class="container-box fade-slide-in">
+  <div class="register-wrapper">
+    <!-- Left Section -->
+    <div class="left-section">
+      <h2>Hello There!</h2>
+      <p>Welcome to our community! Create an account to access exclusive handmade items, DIY tutorials, and more. Let’s get started!</p>
+    </div>
+
+    <!-- Right Section -->
+    <div class="right-section">
+      <h3>Registration Page</h3>
+      <form method="POST" onsubmit="return validateForm()">
+        {% csrf_token %}
+        <input type="text" name="username" id="username" placeholder="Enter Username" required>
+        <input type="email" name="email" id="email" placeholder="Enter Email" required>
+        <input type="password" name="password" id="password" placeholder="Enter Password" required>
+        <input type="password" name="cpassword" id="cpassword" placeholder="Confirm Password" required>
+        <input type="submit" value="Register">
+      </form>
+
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+            {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
+
+      <!-- Animated link to login -->
+      <p><a href="#" onclick="delayedRedirect('{% url 'login' %}')">Already have an account? Login</a></p>
+    </div>
+  </div>
+</div>
+
+<script>
+  function validateForm() {
+    const password = document.getElementById("password").value;
+    const cpassword = document.getElementById("cpassword").value;
+
+    if (password !== cpassword) {
+      alert("Passwords do not match!");
+      return false;
+    }
+    return true;
+  }
+
+  function delayedRedirect(url) {
+    document.querySelector('.container-box').classList.remove('fade-slide-in');
+    document.querySelector('.container-box').style.opacity = '1';
+    document.querySelector('.container-box').style.transition = 'opacity 0.5s';
+    document.querySelector('.container-box').style.opacity = '0';
+    setTimeout(() => {
+      window.location.href = url;
+    }, 500);
+  }
+</script>
+{% endblock %}

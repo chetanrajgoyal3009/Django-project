@@ -14,4 +14,5 @@ urlpatterns = [
     path('blog/<int:post_id>/', views.blog_detail, name='blog_detail'),  # View a single blog post
      path('like/<int:post_id>/', views.like_post, name='like_post'),
      path('post/<int:post_id>/', views.post_detail, name='post_detail'),
+     path('signup/', views.signup_view, name='signup'),
 ]

@@ -1,65 +1,1050 @@
-  <!DOCTYPE html>
-  <html lang="en">
+<!DOCTYPE html>
 
-  <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Document</title>
-      <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-  </head>
-  <style>
-      * {
-          margin: 0;
-          color: #2C1C0C;
-          text-align: center;
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated Background Change</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
 
+
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            /* text-align: center; */
+            padding: 20px;
+            
+        }
+        .pricing-section {
+      display: flex;
+      padding: 100px;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+      animation: fadeIn 1s ease-out forwards;
+    }
+
+    .pricing-card {
+      background: #ffffff;
+      border-radius: 25px;
+      padding: 35px 30px;
+      width: 300px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(40px);
+      animation: slideUp 0.8s ease-out forwards;
+    }
+
+    .pricing-card:nth-child(1) { animation-delay: 0.2s; }
+    .pricing-card:nth-child(2) { animation-delay: 0.4s; }
+    .pricing-card:nth-child(3) { animation-delay: 0.6s; }
+
+    .pricing-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    }
+
+    .highlight {
+      background: linear-gradient(to right, #1e3c72, #2a5298);
+      color: white;
+    }
+
+    .highlight .plan-title,
+    .highlight .plan-price,
+    .highlight .plan-features li {
+      color: white;
+    }
+
+    .plan-title {
+      font-size: 1.6rem;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    .plan-price {
+      font-size: 2.5rem;
+      margin: 10px 0 20px;
+    }
+
+    .plan-features {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 25px;
+    }
+
+    .plan-features li {
+      margin: 12px 0;
+      color: #4b5563;
+      font-size: 1rem;
+    }
+
+    .highlight .plan-btn {
+      background: white;
+      color: #3b82f6;
+    }
+
+    .plan-btn {
+      display: inline-block;
+      padding: 12px 22px;
+      border: none;
+      border-radius: 30px;
+      background: linear-gradient(to right, #1e3c72, #2a5298);
+      color: white;
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .plan-btn:hover {
+      box-shadow: 0 0 12px rgba(99, 102, 241, 0.6);
+      transform: scale(1.05);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
       }
-
-      body {
-          background-image: url(./images/2.png);
-          background-size: cover;
-          background-attachment: fixed;
-          background-repeat: no-repeat;
-          font-family: "Audiowide", serif;
+      to {
+        opacity: 1;
+        transform: translateY(0);
       }
+    }
 
-      .carasole {
-          border: 2px solid black;
-          width: auto;
-          height: 680px;
+    @media (max-width: 992px) {
+      .pricing-section {
+        flex-direction: column;
+        align-items: center;
       }
-  </style>
+    }
+      
+        .background-img {
+            position: absolute;
+            bottom: 0;
+            width: 40%;
+            height: auto;
+            transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+        }
 
-  <body>
-      {% extends 'base.html' %}
-      {% load static %}
-      {% block content %}
-      <div class="carasole">
-          <center>
-              <h1>homepage</h1>
-          </center>
-      </div>
-      <div class="snap-x ...">
-          <div class="snap-center">
-            <img src="{% static 'images/1.png' %}" />
+        /* Fade-out and slide-down effect */
+        .fade-out {
+            opacity: 0;
+            transform: translateY(100px);
+        }
+        .select-btn {
+            background: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .select-btn:hover {
+            background: #0056b3;
+        } 
+
+        .imagesleft{
+            position: absolute;
+            bottom: 0;
+            right: -2%;
+            width: 25%;
+            transform: translateX(20%);
+            transition: all 1s ease-in-out;
+        }
+
+        .imagesright{
+            position: absolute;
+            margin-top: 200px;
+            left: -1%;
+            width: 15%;
+            transform: translateX(-20%);
+            transition: all 1s ease-in-out;
+        }
+
+        .imageslefttop, .imagesrighttop {
+            position: absolute;
+            top: 10%;
+            width: 20%;
+            transition: all 1s ease-in-out;
+        }
+
+        .imageslefttop {
+            left: 5%;
+        }
+
+        .imagesrighttop {
+            right: 5%;
+        }
+        body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    text-align: center;
+    padding: 100px;
+}
+
+
+
+.select-btn {
+    background: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.select-btn:hover {
+    background: #0056b3;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    /* height: 100vh; */
+    /* overflow: hidden; */
+}
+
+/* Fullscreen header */
+#header {
+    display: flex;
+    flex-direction: column;
+    justify-content:flex-start;
+    width: 100v;
+    height: 700px;
+    color: rgb(30, 9, 70);
+    text-align: center;
+    background-size: cover;
+    background-position: center;
+    transition: background 1s ease-in-out;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    transition: background-color 1s ease-in-out;
+    align-items: center;
+}
+
+h1 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+    
+}
+
+h3 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+button {
+    padding: 12px 24px;
+    margin-top: 20px;
+    margin-left: 0px;
+    margin-right: 90px;
+    font-size: 1.2rem;
+    background-color: white;
+    color: #ff7e5f;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    font-weight: bold;
+    width: 200px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+    background-color: #ff7e5f;
+    color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+#sec {
+    text-align: center; /* Center the content */
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+    height: 500px; /* Adjust height as needed */
+    width: 100vw; /* Full width of the page */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(to right, #1e3c72, #2a5298);
+
+    color: white; /* Text color */
+    border-radius: 1px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+#sec h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+#sec p {
+    font-size: 1.2rem;
+}
+
+#sec img {
+    width: 450px; /* Decreased width */
+    height: auto; /* Maintain aspect ratio */
+    position: absolute;
+    right: 10%; /* Align images to the right */
+    bottom: -100px; /* Start below the container */
+    opacity: 0;
+}
+
+@keyframes moveFromBottomToTop {
+    0% {
+        transform: translateY(100vh);
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-100vh);
+        opacity: 0;
+    }
+}
+@keyframes moveFromBottomToTop {
+    0% {
+        transform: translateY(100vh);
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-100vh);
+        opacity: 0;
+    }
+}
+
+  
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+
+/* Responsive Design */
+@media (max-width: 900px) {
+    .plans-container {
+        flex-wrap: wrap; /* Allows plans to wrap on smaller screens */
+        justify-content: center;
+    }
+    .plan {
+        width: 90%; /* Full width on smaller screens */
+        margin-bottom: 15px;
+    }
+}
+/* Blogger Section Styling */
+.blogger-section {
+    position: relative;
+    height: 600px;
+    background-repeat: no-repeat; /* Prevents repeating */
+    background-position: center; /* Centers the image */
+    background: linear-gradient(to right, #1e3c72, #2a5298);
+    background-size: cover; /* Ensures it covers the whole div */
+    color: rgb(0, 0, 0);
+    text-align: center;
+    padding: 100px 20px;
+}
+
+
+/* Text Styling */
+.blogger-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.blogger-section p {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.5;
+}
+
+/* .blogger-section{
+  background-image: url('static/images/background.jpg');
+} */
+
+/* CTA Button */
+.cta-button {
+    background: #2c3e50;
+    color: white;
+    font-size: 1rem;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out, transform 0.3s;
+    margin-top: 20px;
+}
+
+.cta-button:hover {
+    background: #1a252f;
+    transform: scale(1.1);
+}
+
+/* Blogger Markers */
+.blogger-markers {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Animated Marker Icons */
+.marker {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    animation: floatUp 3s infinite alternate ease-in-out;
+}
+
+/* Icons Inside Markers */
+.marker img {
+    width: 30px;
+    height: 30px;
+}
+
+/* Floating Animation */
+@keyframes floatUp {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-10px); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .blogger-section h2 {
+        font-size: 2rem;
+    }
+    .blogger-section p {
+        font-size: 1rem;
+    }
+    .cta-button {
+        font-size: 0.9rem;
+    }
+    .marker {
+        width: 40px;
+        height: 40px;
+    }
+}
+.feedback-carousel {
+  width: 100%;
+  overflow: hidden;
+  background: linear-gradient(135deg, #0f172a, #1e3a8a); /* dark bluish gradient */
+  padding: 40px 0;
+  position: relative;
+}
+
+.carousel-track {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 30px;
+  animation: scrollLeft 60s linear infinite;
+  width: max-content;
+}
+
+.feedback-card {
+  flex: 0 0 auto;
+  max-width: 300px;
+  background: linear-gradient(135deg, #e0f7fa, #f0f4ff, #d1ecff);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+  font-size: 1.1rem;
+  color: #1f2937;
+  font-style: italic;
+  transition: transform 0.3s ease;
+}
+
+.feedback-card:hover {
+  transform: scale(1.05);
+}
+
+@keyframes scrollLeft {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Profile inside card */
+.profile {
+  display: flex;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.profile img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 12px;
+  object-fit: cover;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.profile-info h4 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #111827;
+}
+
+.profile-info p {
+  margin: 2px 0 0;
+  font-size: 0.9rem;
+  color: #4b5563;
+}
+
+
+
+.faq-section {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    border-radius: 16px;
+    background: #f9f9f9;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+
+  }
+
+
+  .faq-title {
+    font-size: 32px;
+    text-align: center;
+    margin-bottom: 30px;
+    font-weight: bold;
+    color: #333;
+  }
+
+  .faq {
+    border-bottom: 1px solid #ddd;
+    padding: 15px 0;
+  }
+
+  .faq:last-child {
+    border-bottom: none;
+  }
+
+  .faq-question {
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: 500;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #1e3c72;
+    transition: color 0.3s ease;
+  }
+
+  .faq-question:hover {
+    color: #2a5298;
+  }
+
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.5s ease-in-out;
+    font-size: 16px;
+    color: #444;
+    line-height: 1.6;
+    padding-right: 20px;
+  }
+
+  .faq.open .faq-answer {
+    max-height: 500px;
+    margin-top: 10px;
+  }
+
+  .icon {
+    transition: transform 0.4s ease;
+  }
+
+  .faq.open .icon {
+    transform: rotate(90deg);
+  }
+
+
+
+
+
+
+
+
+/* .images {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: flex-start; /* Moves content (image) to the right */
+    /* align-items: flex-start;
+    transform: scale(1.1);
+    transition: transform 1s ease-in-out;
+} */ 
+/* #bgimage1 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+} */
+/* .imagesleft{
+        left: 0; /* Moves image to left corner */
+        /* right: auto;
+/* }
+
+.imagesright{
+    right: 0; /* Moves image to right corner */
+    /* left: auto;
+} */ 
+    </style>
+</head>
+<body>
+  {% extends 'base.html' %}
+  {% load static %}
+  {% block content %}
+
+    <div id="container">
+        <div id="header" class="relative isolate bg-white px-6 py-24 sm:py-32 lg:px-8">
+          <!-- Gradient Background Blur -->
+          <div class="absolute inset-x-0 -top-3 -z-10 transform-gpu overflow-hidden px-36 blur-3xl" aria-hidden="true">
+            <div class="mx-auto aspect-1155/678 w-[72.1875rem] bg-gradient-to-tr from-[#bf40bf] via-[#4169e1] to-[#1b1f3b] opacity-30"
+              style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)">
+            </div>
           </div>
-          <div class="snap-center">
-            <img src="{% static 'images/logo.png' %}" />
-          </div>
-          <div class="snap-center ...">
-            <img src="/img/vacation-03.jpg" />
-          </div>
-          <div class="snap-center ...">
-            <img src="/img/vacation-04.jpg" />
-          </div>
-          <div class="snap-center ...">
-            <img src="/img/vacation-05.jpg" />
-          </div>
-          <div class="snap-center ...">
-            <img src="/img/vacation-06.jpg" />
-          </div>
+      
+          <!-- Main Content -->
+          <h1>Publish your passions, your way</h1>
+          <h3>Create a unique and beautiful blog easily.</h3>
+          <button>CREATE YOUR BLOG</button>
+      
+          <!-- Images -->
+          <img id="bgImage" class="background-img" src="{% static 'images/1st.png' %}" alt="oops image not found"  >
+          <img id="bgImage1" class="imagesleft" src="{% static 'images/1a.png' %}" alt="" height="200px" width="200px">
+          <img id="bgImage2" class="imagesright" src="{% static 'images/1b.png' %}" alt="" height="100px" width="100px">
+          <img id="bgImage3" class="imagesrighttop" src="{% static 'images/1c.png' %}" alt="">
+          <img class="imageslefttop" src="{% static 'images/1d.png' %}" alt="">
         </div>
-      {% endblock %}
-  </body>
+      </div>
+      
 
-  </html>
+      <div id="sec">
+        <h2>Choose the perfect design</h2>
+        <p>Create a beautiful blog that fits your style...</p>
+      
+        <div class="image-stack">
+          <img class="slide-up" src="{% static 'images/div2a.png' %}" alt="">
+          <img class="slide-up delay" src="{% static 'images/div2.png' %}" alt="">
+        </div>
+      </div>
+      
+      
+
+        <!-- <div class="relative isolate bg-white px-6 py-24 sm:py-32 lg:px-8">
+            <div class="absolute inset-x-0 -top-3 -z-10 transform-gpu overflow-hidden px-36 blur-3xl" aria-hidden="true">
+              <div class="mx-auto aspect-1155/678 w-[72.1875rem] bg-linear-to-tr from-[#ff80b5] to-[#9089fc] opacity-30" style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"></div>
+            </div>
+            <div class="mx-auto max-w-4xl text-center">
+              <h2 class="text-base/7 font-semibold text-indigo-600">Pricing</h2>
+              <p class="mt-2 text-5xl font-semibold tracking-tight text-balance text-gray-900 sm:text-6xl">Choose the right plan for you</p>
+            </div>
+            <p class="mx-auto mt-6 max-w-2xl text-center text-lg font-medium text-pretty text-gray-600 sm:text-xl/8">Choose an affordable plan that’s packed with the best features for engaging your audience, creating customer loyalty, and driving sales.</p>
+            <div class="mx-auto mt-16 grid max-w-lg grid-cols-1 items-center gap-y-6 sm:mt-20 sm:gap-y-0 lg:max-w-4xl lg:grid-cols-2">
+              <div class="rounded-3xl rounded-t-3xl bg-white/60 p-8 ring-1 ring-gray-900/10 sm:mx-8 sm:rounded-b-none sm:p-10 lg:mx-0 lg:rounded-tr-none lg:rounded-bl-3xl">
+                <h3 id="tier-hobby" class="text-base/7 font-semibold text-indigo-600">Hobby</h3>
+                <p class="mt-4 flex items-baseline gap-x-2">
+                  <span class="text-5xl font-semibold tracking-tight text-gray-900">$29</span>
+                  <span class="text-base text-gray-500">/month</span>
+                </p>
+                <p class="mt-6 text-base/7 text-gray-600">The perfect plan if you&#039;re just getting started with our product.</p>
+                <ul role="list" class="mt-8 space-y-3 text-sm/6 text-gray-600 sm:mt-10">
+                  <li class="flex gap-x-3">
+                    <svg class="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                      <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd" />
+                    </svg>
+                    25 products
+                  </li>
+                  <li class="flex gap-x-3">
+                    <svg class="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                      <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd" />
+                    </svg>
+                    Up to 10,000 subscribers
+                  </li>
+                  <li class="flex gap-x-3">
+                    <svg class="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                      <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd" />
+                    </svg>
+                    Advanced analytics
+                  </li>
+                  <li class="flex gap-x-3">
+                    <svg class="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                      <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd" />
+                    </svg>
+                    24-hour support response time
+                  </li>
+                </ul>
+                <a href="#" aria-describedby="tier-hobby" class="mt-8 block rounded-md px-3.5 py-2.5 text-center text-sm font-semibold text-indigo-600 ring-1 ring-indigo-200 ring-inset hover:ring-indigo-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 sm:mt-10">Get started today</a>
+              </div>
+              <div class="relative rounded-3xl bg-gray-900 p-8 ring-1 shadow-2xl ring-gray-900/10 sm:p-10">
+                <h3 id="tier-enterprise" class="text-base/7 font-semibold text-indigo-400">Enterprise</h3>
+                <p class="mt-4 flex items-baseline gap-x-2">
+                  <span class="text-5xl font-semibold tracking-tight text-white">$99</span>
+                  <span class="text-base text-gray-400">/month</span>
+                </p>
+                <p class="mt-6 text-base/7 text-gray-300">Dedicated support and infrastructure for your company.</p>
+                <ul role="list" class="mt-8 space-y-3 text-sm/6 text-gray-300 sm:mt-10">
+                  <li class="flex gap-x-3">
+                    <svg class="h-6 w-5 flex-none text-indigo-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                      <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd" />
+                    </svg>
+                    Unlimited products
+                  </li>
+                  <li class="flex gap-x-3">
+                    <svg class="h-6 w-5 flex-none text-indigo-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                      <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd" />
+                    </svg>
+                    Unlimited subscribers
+                  </li>
+                  <li class="flex gap-x-3">
+                    <svg class="h-6 w-5 flex-none text-indigo-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                      <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd" />
+                    </svg>
+                    Advanced analytics
+                  </li>
+                  <li class="flex gap-x-3">
+                    <svg class="h-6 w-5 flex-none text-indigo-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                      <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd" />
+                    </svg>
+                    Dedicated support representative
+                  </li>
+                  <li class="flex gap-x-3">
+                    <svg class="h-6 w-5 flex-none text-indigo-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                      <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd" />
+                    </svg>
+                    Marketing automations
+                  </li>
+                  <li class="flex gap-x-3">
+                    <svg class="h-6 w-5 flex-none text-indigo-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                      <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd" />
+                    </svg>
+                    Custom integrations
+                  </li>
+                </ul>
+                <a href="#" aria-describedby="tier-enterprise" class="mt-8 block rounded-md bg-indigo-500 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-xs hover:bg-indigo-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 sm:mt-10">Get started today</a>
+              </div>
+            </div>
+          </div> -->
+
+          
+      
+          <section class="pricing-section">
+            <div class="pricing-card">
+              <div class="plan-title">Basic</div>
+              <div class="plan-price">$10/mo</div>
+              <ul class="plan-features">
+                <li>10 Projects</li>
+                <li>5 GB Storage</li>
+                <li>Email Support</li>
+              </ul>
+              <a href="#" class="plan-btn">Choose Plan</a>
+            </div>
+        
+            <div class="pricing-card highlight">
+              <div class="plan-title">Premium</div>
+              <div class="plan-price">$30/mo</div>
+              <ul class="plan-features">
+                <li>50 Projects</li>
+                <li>50 GB Storage</li>
+                <li>Priority Support</li>
+              </ul>
+              <a href="#" class="plan-btn">Choose Plan</a>
+            </div>
+        
+            <div class="pricing-card">
+              <div class="plan-title">Enterprise</div>
+              <div class="plan-price">$100/mo</div>
+              <ul class="plan-features">
+                <li>Unlimited Projects</li>
+                <li>1 TB Storage</li>
+                <li>24/7 Dedicated Support</li>
+              </ul>
+              <a href="#" class="plan-btn">Choose Plan</a>
+            </div>
+          </section>
+          <div class="feedback-carousel">
+            <div class="carousel-track">
+              <div class="feedback-card">
+                <p>"I stumbled upon your blog while looking for creative inspiration. Every post feels thoughtfully crafted and visually stunning."</p>
+                <div class="profile">
+                  <img src="{% static 'images/muskann.png' %}" alt="Alyssa M.">
+                  <div class="profile-info">
+                    <h4>Alyssa M.</h4>
+                    <p>Creative Director</p>
+                  </div>
+                </div>
+            </div>
+          
+              <div class="feedback-card">
+                <p>"I stumbled upon your blog while looking for creative inspiration. Every post feels thoughtfully crafted and visually stunning."</p>
+                <div class="profile">
+                  <img src="{% static 'images/sukh.png' %}" alt="Leo K.">
+                  <div class="profile-info">
+                    <h4>Leo K.</h4>
+                    <p>Digital Artist</p>
+                  </div>
+                </div>
+              </div>
+          
+              <div class="feedback-card">
+                <p>"I stumbled upon your blog while looking for creative inspiration. Every post feels thoughtfully crafted and visually stunning."</p>
+                <div class="profile">
+                  <img src="{% static 'images/garima.jpg' %}" alt="Ravi N.">
+                  <div class="profile-info">
+                    <h4>Ravi N.</h4>
+                    <p>Web Developer</p>
+                  </div>
+                </div>
+              </div>
+              <div class="feedback-card">
+                <p>"I stumbled upon your blog while looking for creative inspiration. Every post feels thoughtfully crafted and visually stunning."</p>
+                <div class="profile">
+                  <img src="{% static 'images/taniya.png' %}" alt="Leo K.">
+                  <div class="profile-info">
+                    <h4>Leo K.</h4>
+                    <p>Digital Artist</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="faq-section">
+            <h2 class="faq-title">Frequently Asked Questions</h2>
+          
+            <div class="faq">
+              <div class="faq-question" onclick="toggleFAQ(this)">
+                What is this blog platform about?
+                <span class="icon">➤</span>
+              </div>
+              <div class="faq-answer">
+                This platform lets users publish their blogs, read others' content, and engage through comments and likes.
+              </div>
+            </div>
+          
+            <div class="faq">
+              <div class="faq-question" onclick="toggleFAQ(this)">
+                How can I post a new blog?
+                <span class="icon">➤</span>
+              </div>
+              <div class="faq-answer">
+                Once registered and logged in, you'll find a "Create Blog" button in your dashboard where you can write and publish.
+              </div>
+            </div>
+          
+            <div class="faq">
+              <div class="faq-question" onclick="toggleFAQ(this)">
+                Can I edit or delete my blog after posting?
+                <span class="icon">➤</span>
+              </div>
+              <div class="faq-answer">
+                Yes! Navigate to "My Blogs" section in your dashboard to edit or delete your posts anytime.
+              </div>
+            </div>
+          
+            <div class="faq">
+              <div class="faq-question" onclick="toggleFAQ(this)">
+                Is there a comment feature for readers?
+                <span class="icon">➤</span>
+              </div>
+              <div class="faq-answer">
+                Absolutely. Readers can leave comments under any blog post, and authors can moderate them.
+              </div>
+            </div>
+          
+            <div class="faq">
+              <div class="faq-question" onclick="toggleFAQ(this)">
+                How can I report inappropriate content?
+                <span class="icon">➤</span>
+              </div>
+              <div class="faq-answer">
+                Every post has a "Report" button to flag it. Our moderators review reports to maintain community guidelines.
+              </div>
+            </div>
+          
+        
+  </div>
+      <div class="blogger-section">
+        <h2>Join millions of others</h2>
+        <p>
+            Whether sharing your expertise, breaking news, or whatever’s on your mind, 
+            you’re in good company on Blogger. Sign up to discover why millions of people 
+            have published their passions here.
+        </p>
+        <button class="cta-button">CREATE YOUR BLOG</button>
+    
+        <!-- Animated Blogger Markers -->
+        <div class="blogger-markers" style="background-image: ;">
+            <div class="marker" style="top: 15%; left: 10%;"><img src="{% static 'images/logo.png' %}"></div>
+            <!-- <div class="marker" style="top: 25%; left: 35%;"><img src="avatar1.png"></div> -->
+            <!-- <div class="marker" style="top: 35%; left: 60%;"><img src="post.png"></div> -->
+            <div class="marker" style="top: 45%; left: 80%;"><img src="{% static 'images/logo.png' %}"></div>
+            <div class="marker" style="top: 55%; left: 20%;"><img src="{% static 'images/logo.png' %}"></div>
+            <div class="marker" style="top: 65%; left: 50%;"><img src="{% static 'images/logo.png' %}"></div>
+            <div class="marker" style="top: 75%; left: 75%;"><img src="{% static 'images/logo.png' %}"></div>
+            <div class="marker" style="top: 85%; left: 30%;"><img src="{% static 'images/logo.png' %}"></div>
+        </div>
+      </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+      
+      function selectPlan(selectedPlan) {
+            document.querySelectorAll('.plan').forEach(plan => plan.classList.remove('selected'));
+            selectedPlan.classList.add('selected');
+        }
+
+        const backgrounds = [
+           "{%static 'images/1st.png' %}",
+           "{%static 'images/2nd.png' %}",
+           "{%static 'images/3rd.png' %}",
+        ];
+
+        const imagesLeft = [
+            "{%static 'images/1a.png' %}", 
+            "{%static 'images/2a.png' %}", 
+            "{%static 'images/3a.png' %}",
+        ];
+
+        const imagesRight = [
+            "{%static 'images/1b.png' %}", 
+            "{%static 'images/2b.png' %}", 
+            "{%static 'images/3b.png' %}",
+        ];
+
+        const imagesLeftTop = [
+            "{%static 'images/1d.png' %}", 
+            "{%static 'images/2d.png' %}", 
+            "{%static 'images/3d.png' %}",
+        ];
+
+        const imagesRightTop = [
+            "{%static 'images/1c.png' %}", 
+            "{%static 'images/2c.png' %}", 
+            "{%static 'images/3c.png' %}",
+        ];
+
+        let imageIndex = 0;
+       
+        let colorIndex = 0;
+
+        function changeBackground() {
+            const img = document.getElementById("bgImage");
+            const img1 = document.getElementById("bgImage1");
+            const img2 = document.getElementById("bgImage2");
+            const img3 = document.getElementById("bgImage3");
+            const img4 = document.querySelector(".imageslefttop");
+
+            // Add fade-out class for all images
+            img.classList.add("fade-out");
+            img1.classList.add("fade-out");
+            img2.classList.add("fade-out");
+            img3.classList.add("fade-out");
+            img4.classList.add("fade-out");
+
+            // Change the images after the transition
+            setTimeout(() => {
+                img.src = backgrounds[imageIndex];
+                img1.src = imagesLeft[imageIndex % imagesLeft.length]; // Ensures the image index loops
+                img2.src = imagesRight[imageIndex % imagesRight.length]; // Ensures the image index loops
+                img3.src = imagesRightTop[imageIndex % imagesRightTop.length];
+                img4.src = imagesLeftTop[imageIndex % imagesLeftTop.length];
+
+                // Remove fade-out class after the transition
+                img.classList.remove("fade-out");
+                img1.classList.remove("fade-out");
+                img2.classList.remove("fade-out");
+                img3.classList.remove("fade-out");
+                img4.classList.remove("fade-out");
+            }, 800);
+
+            // Loop the images
+            imageIndex = (imageIndex + 1) % backgrounds.length;
+        }
+
+        function changeBackgroundColor() {
+            document.getElementById("header").style.backgroundColor = backgroundColors[colorIndex];
+            colorIndex = (colorIndex + 1) % backgroundColors.length;
+        }
+
+        // Set intervals to change the background every 4 seconds
+        setInterval(changeBackground, 4000);
+        setInterval(changeBackgroundColor, 4000);
+
+        // Initial background change
+        changeBackground();
+        changeBackgroundColor();
+        document.addEventListener("DOMContentLoaded", function () {
+    let images = document.querySelectorAll("#sec img");
+    
+    function animateImages() {
+        images.forEach((img, i) => {
+            img.style.animation = `moveFromBottomToTop 1s ease-in-out ${i * 1}s infinite`;
+            img.style.opacity = "1";
+            img.style.zIndex = images.length - i;
+        });
+    }
+    
+    animateImages();
+});
+function toggleFAQ(element) {
+    const faq = element.parentElement;
+    faq.classList.toggle('open');
+  }
+        
+      
+   
+    </script>
+    {% endblock content %}
+    </body>
+</html>
