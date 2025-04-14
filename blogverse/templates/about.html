@@ -72,6 +72,7 @@
             padding: 40px;
             background: rgba(255, 255, 255, 0.95);
             text-align: center;
+            margin-left: 190px ;
 
             margin-top: 0%;
             padding-top: 0px;
@@ -184,9 +185,37 @@
             margin-top: 10px;
         }
 
+        .mission img {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+        }
+
+        .mission-text {
+            max-width: 500px;
+        }
+
+
         @media (max-width: 768px) {
             .stat-box {
                 width: 80%;
+            }
+        }
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .stat-box h2 {
+                font-size: 1.8rem;
+            }
+
+            .mission {
+                flex-direction: column;
+            }
+
+            .mission-text, .mission img {
+                max-width: 100%;
             }
         }
     </style>
