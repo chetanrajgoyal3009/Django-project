@@ -11,20 +11,27 @@
   <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f5f5f5;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #0d1b2a;
+      color: #ffffff;
+    }
+
+    .container {
+      max-width: 100%;
+      margin: auto;
     }
 
     .upper {
-      background-color: rgba(182, 135, 135, 0.715);
+      background-color: #1b263b;
       height: 340px;
       width: 100%;
+      border-bottom: 4px solid #415a77;
     }
 
     .coverphoto {
       width: 100%;
       height: 190px;
-      background-color: gray;
+      background-color: #778da9;
     }
 
     .coverphoto img {
@@ -40,7 +47,7 @@
       overflow: hidden;
       margin-left: 70px;
       margin-top: -75px;
-      background-color: rgb(227, 32, 32);
+      background-color: #1d3557;
       border: 5px solid white;
     }
 
@@ -51,112 +58,121 @@
     }
 
     .username h2 {
-      margin-left: 230px;
+      margin-left: 240px;
       margin-top: -70px;
-      font-size: 30px;
-      color: #000;
+      font-size: 32px;
+      color: #e0e1dd;
     }
 
     .username p {
-      margin-left: 230px;
-      color: #000;
+      margin-left: 240px;
+      color: #a8dadc;
+      font-size: 16px;
     }
 
     .edit {
-      margin-left: calc(100% - 150px);
+      margin-left: calc(100% - 180px);
       margin-top: -50px;
     }
 
-    .edit button {
-      padding: 8px 15px;
-      border: 1px solid white;
-      border-radius: 10px;
-      background-color: #fff;
-    }
 
     .edit a {
       text-decoration: none;
-      color: #000;
+      color: #f1faee;
       font-weight: bold;
     }
 
     .bottom {
       display: grid;
-      grid-template-columns: 1fr 3fr;
+      grid-template-columns: 1fr 2fr;
       gap: 20px;
       padding: 20px;
     }
 
-    .about {
-      background: #fbf6f6;
+    .about, .posts {
+      background: #1b263b;
       padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     }
 
-    .about h2 {
-      color: #5d0405;
+    .about h2, .posts h4 {
+      color: #a8dadc;
+      border-bottom: 2px solid #415a77;
+      padding-bottom: 10px;
+      margin-bottom: 15px;
     }
 
     .about p {
       display: flex;
       align-items: center;
       font-size: 14px;
-      color: #333;
+      color: #f1faee;
       margin: 10px 0;
     }
 
     .material-symbols-outlined {
-      color: #800000;
+      color: #00b4d8;
       margin-right: 10px;
     }
 
-    .posts {
-      background: #fbf6f6;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-
     .card {
-      background: white;
+      background: #0d1b2a;
       padding: 15px;
       margin-bottom: 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      border: 1px solid #415a77;
+      transition: transform 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
     }
 
     .card-title {
       font-size: 20px;
       margin-bottom: 10px;
-      color: #333;
+      color: #e0e1dd;
     }
 
     .card-text {
       font-size: 14px;
-      color: #555;
+      color: #cfd8dc;
     }
 
     .btn {
-      padding: 5px 10px;
-      border-radius: 5px;
+      padding: 6px 12px;
+      border-radius: 6px;
       text-decoration: none;
       font-size: 14px;
+      transition: all 0.2s;
     }
 
     .btn-outline-primary {
-      border: 1px solid #007bff;
-      color: #007bff;
+      border: 1px solid #00b4d8;
+      color: #00b4d8;
+      background: transparent;
+    }
+
+    .btn-outline-primary:hover {
+      background-color: #00b4d8;
+      color: #0d1b2a;
     }
 
     .btn-outline-secondary {
-      border: 1px solid gray;
-      color: gray;
+      border: 1px solid #aaa;
+      color: #aaa;
+      background: transparent;
+    }
+
+    .btn-outline-secondary:hover {
+      background-color: #aaa;
+      color: #0d1b2a;
     }
 
     .btn-success {
-      background-color: green;
-      color: white;
+      background-color: #06d6a0;
+      color: #0d1b2a;
       border: none;
     }
 
@@ -180,7 +196,6 @@
 </head>
 
 <body>
-
   <div class="container">
     <div class="upper">
       <div class="coverphoto">
@@ -198,7 +213,7 @@
         <p>{{ profile.profession }}</p>
       </div>
       <div class="edit">
-        <button><a href="{% url 'update_profile' %}">Edit Profile</a></button>
+        <button class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800"><a href="{% url 'update_profile' %}">Edit Profile</a></button>
       </div>
     </div>
 
@@ -220,7 +235,7 @@
           <h5 class="card-title">{{ post.title }}</h5>
           <p class="card-text">{{ post.content|truncatewords:30 }}</p>
           <p class="card-text"><small class="text-muted">Published on {{ post.created_at|date:"F j, Y" }}</small></p>
-          <div style="display: flex; justify-content: space-between;">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
             <a href="{% url 'post_detail' post.pk %}" class="btn btn-outline-primary">Read More</a>
             <form method="post" action="{% url 'like_post' post.pk %}">
               {% csrf_token %}
@@ -238,7 +253,7 @@
       </div>
     </div>
   </div>
-  {% endblock %}
+{% endblock %}
 </body>
 
 </html>

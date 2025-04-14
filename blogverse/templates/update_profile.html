@@ -20,7 +20,8 @@
         }
 
         .container {
-            background: rgba(255, 255, 255, 0.2);
+            background: linear-gradient(35deg,rgba(40, 39, 52, 1) 0%, rgba(20, 20, 89, 1) 75%, rgba(40, 39, 52, 1) 100%);            padding: 10px 30px;
+border-radius: 1.0rem;
             padding: 30px;
             width: 100%;
             max-width: 600px;
@@ -36,7 +37,7 @@
         }
 
         h2 {
-            color: #222;
+            color: #31a9ff;
             margin-bottom: 20px;
             font-weight: 600;
             font-size: 32px;
@@ -53,7 +54,7 @@
             text-align: left;
             font-weight: 500;
             margin-top: 10px;
-            color: #000000;
+            color: rgb(230, 230, 230);
             font-size: 18px;
             width: 100%;
         }
@@ -67,22 +68,36 @@
             margin: 4px;
             border: none;
             background-color: transparent;
-            color: #222;
+            color: #ffffff;
             font-size: 16px;
             text-align: left;
             outline: none;
             transition: 0.3s;
         }
-
+        input#id_name,
+        input#id_profession,
+        input#id_gender,
+        input#id_birthdate,
+        input#id_address,
+        input#id_email,
+        input#id_phone{
+            color: white;
+        }
+        #text{
+            color: white;
+        }
         input:hover,
         select:hover,
         textarea:hover {
-            border-bottom: 2px solid #800000;
+            border-bottom: 2px solid #090741;
         }
 
         input:focus {
             background-color: transparent;
+            
         }
+
+
 
         button {
             background-color: #ad1f1f;
@@ -122,14 +137,39 @@
             background-color: #c54545;
             transform: scale(1.05);
         }
+        input[type="file"] {
+    color: white;
+    background-color: transparent;
+    border: none;
+    font-size: 16px;
+    margin-top: 5px;
+    cursor: pointer;
+    width: 100%;
+    max-width: 570px;
+}
+
+input[type="file"]::file-selector-button {
+    background-color: #ad1f1f;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 12px;
+    margin-right: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+input[type="file"]::file-selector-button:hover {
+    background-color: #c54545;
+}
+
 
         input[type="checkbox"] {
             width: 18px;
-            height: 18px;
-            accent-color: rgb(128, 0, 0);
-            cursor: pointer;
-            border-radius: 4px;
-            transition: all 0.3s ease-in-out;
+    height: 18px;
+    accent-color: #800000;
+    margin-left: 5px;
+    cursor: pointer;
         }
 
         input[type="checkbox"]:hover {
