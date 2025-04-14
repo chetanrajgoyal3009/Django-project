@@ -8,6 +8,8 @@
   <title>Blogverse</title>
   <script src="{% static 'js/like.js' %}"></script>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-dCDW6gkVbc1sIuVbV9ZnK1A+VLx+lZfCqJ0uykNQp6bx9ly8qT+uP9DqX4T+PG3b6b96sUorD1wEb6HQeM2vLw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
   <style>
     /* Ensure navbar doesn't affect dropdown positioning */
     .navbar-container {
@@ -119,7 +121,58 @@
     {% endblock content %}
   </main>
 
+  <footer class="bg-gray-900 text-gray-300 py-12 px-6">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+  
+      <!-- Logo + Slogan + Socials -->
+      <div class="md:col-span-2">
+        <div class="flex items-center space-x-2 mb-4">
+          <img src="{% static 'images/bloglogo.png' %}" alt="Logo" class="w-10 h-10">
+          <span class="font-semibold text-white text-xl">Blogverse</span>
+        </div>
+        <p class="text-sm leading-6 mb-6 float-left">Craft a Better World, One Blog at a Time — Beautifully, Uniquely, You.</p>
+        <br>
+
+        <form class="flex flex-col sm:flex-row items-center sm:items-stretch space-y-3 sm:space-y-0 sm:space-x-2 float-left">
+          <input type="email" placeholder="Your email" class="w-10vh px-4 py-2 rounded bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500">
+          <button class="bg-indigo-600 hover:bg-indigo-700 px-4 py-2 rounded text-white text-sm transition">Subscribe</button>
+        </form>
+      </div>
+  
+      <!-- Features -->
+      <div>
+        <h4 class="text-white font-semibold mb-3 text-lg">Features</h4>
+        <ul class="space-y-2 text-sm">
+          <li><a href="{% url 'about' %}" class="hover:text-white transition">About</a></li>
+          <li><a href="{% url 'blog_list' %}" class="hover:text-white transition">Blog</a></li>
+          <li><a href="{% url 'write_blog' %}" class="hover:text-white transition">Write Blogs</a></li>
+          <li><a href="" class="hover:text-white transition">Quiz</a></li>
+        </ul>
+      </div>
+  
+      <!-- Legal & Newsletter -->
+      <div>
+        <h4 class="text-white font-semibold mb-3 text-lg">Legal</h4>
+        <ul class="space-y-2 text-sm mb-6">
+          <li><a href="#" class="hover:text-white transition">Terms of service</a></li>
+          <li><a href="#" class="hover:text-white transition">Privacy policy</a></li>
+          <li><a href="#" class="hover:text-white transition">License</a></li>
+        </ul>
+  
+        
+      </div>
+  
+    </div>
+  
+    <!-- Bottom -->
+    <div class="mt-10 border-t border-gray-700 pt-6 text-center text-sm text-gray-500">
+      © 2024 BlogVerse, Inc. All rights reserved.
+    </div>
+  </footer>
+
   <script>
+
+
     function toggleMenu() {
       document.querySelector('#profile').classList.toggle('open-close');
     }
