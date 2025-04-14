@@ -43,7 +43,7 @@
           id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown"
           data-dropdown-placement="bottom">
           <span class="sr-only">Open user menu</span>
-          <img class="w-8 h-8 rounded-full" src="/docs/images/people/profile-picture-3.jpg" alt="user photo">
+          <img class="w-8 h-8 rounded-full" src="{{ profile.profile_image.url }}" alt="user photo">
         </button>
 
         <a href="{% url 'login' %}"><button type="button" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800">Get Started</button></a>
@@ -54,8 +54,8 @@
             id="user-dropdown">
             <!-- Your dropdown content remains the same -->
             <div class="px-4 py-3">
-              <span class="block text-sm text-gray-900 dark:text-white">Bonnie Green</span>
-              <span class="block text-sm text-gray-500 truncate dark:text-gray-400">name@flowbite.com</span>
+              <span class="block text-sm text-gray-900 dark:text-white">{{ request.user.username }}</span>
+              <span class="block text-sm text-gray-500 truncate dark:text-gray-400">{{ request.user.email }}</span>
             </div>
             <ul class="py-2" aria-labelledby="user-menu-button">
               <li>
