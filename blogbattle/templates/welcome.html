@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  {% load static %}
+
+  <title>BlogBattle: Challenge Your Mind</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Outfit', sans-serif;
+      background: url("{% static 'images/landing.jpg' %}") no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+      overflow-x: hidden;
+      animation: fadeInBody 1.5s ease-in;
+    }
+
+
+
+    .overlay {
+      background: rgba(0, 0, 0, 0.65);
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 1;
+      animation: fadeInOverlay 1.5s ease-in;
+    }
+
+
+
+    .container {
+      position: relative;
+      padding: 60px 40px;
+      max-width: 1200px;
+      margin: auto;
+      z-index: 2;
+    }
+
+    .intro {
+      max-width: 600px;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 30px;
+      border-radius: 20px;
+      margin-bottom: 40px;
+      backdrop-filter: blur(4px);
+      animation: slideUp 1.2s ease;
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .intro h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      transition: color 0.3s ease;
+    }
+
+    .intro h1:hover {
+      color: #00d9ff;
+    }
+
+    .intro p {
+      font-size: 1rem;
+      margin-bottom: 30px;
+      line-height: 1.6;
+      transition: opacity 0.3s ease;
+    }
+
+    .intro button {
+      padding: 12px 24px;
+      font-size: 1rem;
+      border: none;
+      background-color: #00d9ff;
+      color: #000;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .intro button:hover {
+      background-color: #00b2d1;
+      transform: scale(1.05);
+    }
+
+    .quiz-options {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      margin-top: 40px;
+      backdrop-filter: blur(8px);
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      overflow: hidden;
+      animation: fadeInCards 2s ease;
+    }
+
+    @keyframes fadeInCards {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .option-card {
+      padding: 20px;
+      transition: background 0.3s ease, transform 0.3s ease;
+      cursor: pointer;
+    }
+
+    .option-card:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: scale(1.05);
+    }
+
+    .option-card h3 {
+      margin-bottom: 10px;
+      font-size: 1.2rem;
+      transition: color 0.3s ease;
+    }
+
+    .option-card:hover h3 {
+      color: #00d9ff;
+    }
+
+    .option-card p {
+      font-size: 0.95rem;
+      color: #ddd;
+      transition: color 0.3s ease;
+    }
+
+    .option-card:hover p {
+      color: #fff;
+    }
+    .option-card:hover {
+  box-shadow: 0 0 12px #00d9ff80;
+}
+
+    @media (max-width: 600px) {
+  .intro h1 {
+    font-size: 2rem;
+  }
+
+  .intro p {
+    font-size: 0.9rem;
+  }
+
+  .intro button {
+    width: 100%;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="intro">
+      <h1>Welcome to BlogBattle 🚀</h1>
+      <p>Earn points, rise in ranks, and sharpen your mind. Take on challenges like BlogQuests, Time-Based Blog Writing, and explore AI-powered feedback. Are you ready to compete and create?</p>
+      <button onclick="startQuiz()">Start Your Challenge</button>
+    </div>
+
+    <div class="quiz-options">
+      <div class="option-card">
+        <h3>🧠 BlogQuests</h3>
+        <p>Quizzes from blogs to test your comprehension and reward your curiosity.</p>
+      </div>
+      <div class="option-card">
+        <h3>⏳ Time Challenge</h3>
+        <p>Write fast and smart. Time-limited blogs judged by AI for creativity and clarity.</p>
+      </div>
+      <div class="option-card">
+        <h3>🎯 Daily Missions</h3>
+        <p>Complete daily goals like reading blogs or writing short posts. Earn streaks and XP.</p>
+      </div>
+      <div class="option-card">
+        <h3>🏆 Leaderboard</h3>
+        <p>Climb the ranks, compete in themed blog contests, and win exclusive rewards.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function startQuiz() {
+      alert("Get ready to level up your blog game! 💥");
+      // You can redirect to your quiz route here
+      // window.location.href = "/blogbattle/quiz/start";
+    }
+  </script>
+</body>
+</html>
