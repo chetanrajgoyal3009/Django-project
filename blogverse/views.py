@@ -184,6 +184,17 @@ def landing(request):
 
 from django.db.models import Q  # Add this import at the top
 
+# def blog_list(request):
+#     query = request.GET.get('q')  # Get search query from the URL
+#     if query:
+#         posts = BlogPost.objects.filter(
+#             Q(title__icontains=query) | Q(content__icontains=query)
+#         ).order_by('-created_at')
+#     else:
+#         posts = BlogPost.objects.all().order_by('-created_at')
+    
+#     return render(request, 'Blog.html', {'posts': posts, 'query': query})
+@login_required
 def blog_list(request):
     query = request.GET.get('q')  # Get search query from the URL
     if query:
@@ -192,8 +203,13 @@ def blog_list(request):
         ).order_by('-created_at')
     else:
         posts = BlogPost.objects.all().order_by('-created_at')
-    
+
+    # ✅ Attach profile to each post
+    for post in posts:
+        post.profile = Profile.objects.filter(user=post.user).first()
+
     return render(request, 'Blog.html', {'posts': posts, 'query': query})
+
 
 
 def blog_detail(request, post_id):
