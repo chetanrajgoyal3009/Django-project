@@ -295,16 +295,15 @@
       {% else %}
       <img src="{% static 'images/default.png' %}" alt="Default Image">
       {% endif %}
-      <h2>{{ profile.name }}</h2>
-      <h4>{{ profile.profession }}</h4>
+      <h2>{{ user.name }}</h2>
       <br><br>
 
       <div class="details">
-        <p><span class="material-symbols-outlined">wc</span> {{ profile.gender }}</p>
-        <p><span class="material-symbols-outlined">cake</span> {{ profile.birthdate }}</p>
-        <p><span class="material-symbols-outlined">location_on</span> {{ profile.address }}</p>
-        <p><span class="material-symbols-outlined">mail</span> {{ profile.email }}</p>
-        <p><span class="material-symbols-outlined">call</span> {{ profile.phone }}</p>
+        <p><span class="material-symbols-outlined">wc</span> {{ user.gender }}</p>
+        <p><span class="material-symbols-outlined">cake</span> {{ user.birthdate }}</p>
+        <p><span class="material-symbols-outlined">location_on</span> {{ user.address }}</p>
+        <p><span class="material-symbols-outlined">mail</span> {{ user.email }}</p>
+        <p><span class="material-symbols-outlined">call</span> {{ user.phone }}</p>
       </div>
       <br>
       <a class="btn" href="{% url 'update_profile' %}">Edit Profile</a>

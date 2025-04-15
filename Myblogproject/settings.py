@@ -54,6 +54,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'Myblogproject.urls'
+AUTH_USER_MODEL = 'blogverse.appUser'
 
 TEMPLATES = [
     {

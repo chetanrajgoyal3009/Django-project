@@ -1,30 +1,28 @@
-    
 {% extends 'base.html' %}
+{% block title_block %} Login Page {% endblock %}
 {% block content %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <title>Login Page</title>
     <style>
         body {
             font-family: 'Segoe UI', sans-serif;
-            /* color: #333; */
             min-height: 100vh;
+            margin: 0;
+            background: #f4f7fa;
         }
 
         .login-container {
-          height: 500px;;
-          margin-top: 100px;
-          margin-left: 300px;
-          margin-right: 1500px;
-          border-radius: 20px;
-          display: flex;
-          width: 100%;
-          max-width: 900px;
-          background: #ffffff;
-          box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-          animation: fadeIn 1s ease-in-out;
+            margin: 100px auto;
+            width: 100%;
+            max-width: 900px;
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            display: flex;
+            animation: fadeIn 1s ease-in-out;
         }
 
         .left-panel, .right-panel {
@@ -34,8 +32,8 @@
         }
 
         .left-panel {
-          background-image: url();
-          background: linear-gradient(to right, #1e3c72, #2a5298);
+            background: linear-gradient(to right, #1e3c72, #2a5298);
+            background-image: url(https://img.freepik.com/free-photo/golden-frame-blue-background_53876-92990.jpg?uid=R195611394&ga=GA1.1.808562141.1730749088&semt=ais_hybrid&w=740);
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -54,19 +52,25 @@
             line-height: 1.6;
         }
 
+        .right-panel {
+            background: #ffffff;
+        }
+
         .right-panel h1 {
             font-size: 2em;
             margin-bottom: 30px;
             text-align: center;
+            color: #333;
         }
 
         .form-label {
             display: block;
             margin-bottom: 8px;
             font-weight: 600;
+            color: #333;
         }
 
-        input[type="text"], input[type="password"] {
+        input[type="email"], input[type="password"], select {
             width: 100%;
             padding: 12px;
             margin-bottom: 20px;
@@ -74,9 +78,10 @@
             border: 1px solid #ccc;
             border-radius: 6px;
             transition: border 0.3s ease;
+            font-size: 1em;
         }
 
-        input[type="text"]:focus, input[type="password"]:focus {
+        input[type="email"]:focus, input[type="password"]:focus, select:focus {
             outline: none;
             border-color: #8ec5fc;
         }
@@ -94,7 +99,7 @@
         }
 
         input[type="submit"]:hover {
-          background: linear-gradient(to right, #1e3c72, #2a5298);
+            background: linear-gradient(to right, #2a5298, #1e3c72);
             transform: scale(1.02);
         }
 
@@ -122,21 +127,26 @@
         }
 
         @keyframes fadeIn {
-            0% {opacity: 0;}
-            100% {opacity: 1;}
+            0% { opacity: 0; }
+            100% { opacity: 1; }
         }
 
         @keyframes slideInLeft {
-            from {transform: translateX(-50%); opacity: 0;}
-            to {transform: translateX(0); opacity: 1;}
+            from { transform: translateX(-50%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
         }
 
         @media (max-width: 768px) {
             .login-container {
                 flex-direction: column;
+                margin: 50px auto;
+                width: 90%;
             }
             .left-panel {
                 display: none;
+            }
+            .right-panel {
+                padding: 20px;
             }
         }
     </style>
@@ -154,15 +164,27 @@
         <h1>Login Page</h1>
         <form method="POST" id="login-form">
             {% csrf_token %}
-            <label for="username" class="form-label">Enter Username:</label>
-            <input type="text" name="username" id="username" required>
-
-            <label for="password" class="form-label">Enter Password:</label>
-            <input type="password" name="password" id="password" required>
-
+            <div class="mb-3">
+                <label for="email" class="form-label">Enter Email:</label>
+                <input type="email" name="email" id="email" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Enter Password:</label>
+                <input type="password" name="password" id="password" required>
+            </div>
+            <div class="mb-3">
+                <label for="role" class="form-label">Choose Role:</label>
+                <select name="role" required>
+                    <option value="" disabled selected>Choose Role</option>
+                    <option value="user">User</option>
+                    <option value="admin">Admin</option>
+                </select>
+            </div>
             <input type="submit" value="Login">
         </form>
-        <p style="text-align:center; margin-top:15px;"><a href="{% url 'signup' %}">New User? Register</a></p>
+        <p style="text-align:center; margin-top:15px;">
+            <a href="#" onclick="delayedRedirect('{% url 'signup' %}')">New User? Register</a>
+        </p>
 
         {% if messages %}
         <div class="messages">
@@ -180,6 +202,15 @@
     document.getElementById('login-form').addEventListener('submit', function () {
         document.querySelector('input[type="submit"]').value = 'Logging in...';
     });
+
+    function delayedRedirect(url) {
+        const container = document.querySelector('.login-container');
+        container.style.transition = 'opacity 0.5s';
+        container.style.opacity = '0';
+        setTimeout(() => {
+            window.location.href = url;
+        }, 500);
+    }
 </script>
 </body>
 </html>
