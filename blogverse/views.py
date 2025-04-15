@@ -80,7 +80,7 @@ def blog_list(request):
     query = request.GET.get('q')  # Get search query from the URL
     if query:
         posts = BlogPost.objects.filter(
-            Q(title_icontains=query) | Q(content_icontains=query)
+            Q(title__icontains=query) | Q(content__icontains=query)
         ).order_by('-created_at')
     else:
         posts = BlogPost.objects.all().order_by('-created_at')
