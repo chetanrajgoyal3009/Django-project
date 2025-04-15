@@ -12,10 +12,12 @@
     }
 
     h2 {
+        padding-top: 10px;
         text-align: center;
         letter-spacing: 2px;
-        font-size: 20px;
-        color: #615fff;
+        font-size: 30px;
+        color: #c0c0c0;
+        font-family: ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
     }
 
     .edit-container {
@@ -26,9 +28,10 @@
         box-shadow: 0 0 8px #9786a8;
         position: relative;
         border-radius: 15px;
-        background: linear-gradient(35deg, rgba(40, 39, 52, 1) 0%, rgba(20, 20, 89, 1) 75%, rgba(40, 39, 52, 1) 100%);
+        /* background: linear-gradient(35deg, rgba(40, 39, 52, 1) 0%, rgba(20, 20, 89, 1) 75%, rgba(40, 39, 52, 1) 100%); */
         padding: 10px 30px;
         margin-bottom:30px;
+        background-color:rgb(17 24 39);
     }
 
     .close {
@@ -66,6 +69,7 @@
         border: none;
     }
 
+    
     #titleInput {
         height: 50px;
         font-size: 1.2rem;
@@ -76,7 +80,7 @@
         resize: none;
     }
 
-    .custom-file-upload {
+    /* .custom-file-upload {
         display: inline-flex;
         align-items: center;
         gap: 10px;
@@ -86,7 +90,20 @@
         cursor: pointer;
         border-radius: 5px;
         font-weight: 600;
-    }
+    } */
+    .custom-file-upload {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background-color: #615fff;
+            color: #ece2d5;
+            padding: 10px 15px;
+            /* border: 1px solid #ece2d5; */
+            cursor: pointer;
+            border-radius: 5px;
+            width: 160px;
+            margin-bottom: 10px;
+        }
 
     #fileInput {
         display: none;
@@ -97,7 +114,7 @@
         color: #ece2d5;
         width: 100px;
         height: 40px;
-        box-shadow: 0 0 8px #615fff;
+        border-radius: 5px;
         position: absolute;
         right: 25px;
         bottom: 20px;
@@ -108,19 +125,22 @@
         cursor: pointer;
         scale: 1.1;
         transition: ease-in-out 0.2s;
+        box-shadow: 0 0 8px #615fff;
     }
 
-    a.cancel-link {
+    /* a.cancel-link {
         display: block;
         text-align: center;
         margin-top: 20px;
         color: #ece2d5;
-        text-decoration: underline;
+        text-decoration: none;
     }
 
     a.cancel-link:hover {
-        color: #ffffff;
-    }
+        color: red;
+        transition: ease-in-out 0.2s;
+        scale: 1.1;
+    } */
 
     label {
         color: #ece2d5;
@@ -152,7 +172,7 @@
         <input type="submit" value="Update">
     </form>
 
-    <a href="{% url 'blog_detail' post.id %}" class="cancel-link">Cancel</a>
+    
 </div>
 
 <script>

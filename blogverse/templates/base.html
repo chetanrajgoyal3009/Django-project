@@ -26,6 +26,10 @@
       top: 100%;
       min-width: 220px;
     }
+    footer{
+      background-color:rgb(17 24 39) ;
+      button
+    }
   </style>
 </head>
 
@@ -130,58 +134,60 @@
     {% endblock content %}
   </main>
 
-  <footer class="bg-gray-900 text-gray-300 py-12 px-6">
-    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
-
-      <!-- Logo + Slogan + Socials -->
-      <div class="md:col-span-2">
-        <div class="flex items-center space-x-2 mb-4">
-          <img src="{% static 'images/bloglogo.png' %}" alt="Logo" class="w-10 h-10">
-          <span class="font-semibold text-white text-xl">Blogverse</span>
-        </div>
-        <p class="text-sm leading-6 mb-6 float-left">Craft a Better World, One Blog at a Time — Beautifully, Uniquely,
-          You.</p>
+  <footer class="text-white px-6 py-12">
+    <div class="max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10">
+      
+      <!-- Logo and Description -->
+      <div>
+        <!-- <img src="{% static 'images/bloglogo.png' %}" alt="Logo" class="w-10 h-10 mb-4"> -->
+        <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse">
+          <img src="{% static 'images/bloglogo.png' %}" class="h-8" alt="Logo" />
+          <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">BlogVerse</span>
+        </a>
         <br>
-
-        <form
-          class="flex flex-col sm:flex-row items-center sm:items-stretch space-y-3 sm:space-y-0 sm:space-x-2 float-left">
-          <input type="email" placeholder="Your email"
-            class="w-10vh px-4 py-2 rounded bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500">
-          <button
-            class="bg-indigo-600 hover:bg-indigo-700 px-4 py-2 rounded text-white text-sm transition">Subscribe</button>
+        <p class="text-sm leading-snug">
+          BlogVerse empowers voices across the globe, uniting storytellers and thinkers to 
+          <span class="font-bold">INSPIRE THE WORLD.</span>
+        </p>
+        <div class="flex space-x-4 mt-4">
+          <a href="#"><i class="fab fa-instagram text-lg hover:text-gray-400"></i></a>
+          <a href="#"><i class="fab fa-facebook-f text-lg hover:text-gray-400"></i></a>
+          <a href="#"><i class="fab fa-twitter text-lg hover:text-gray-400"></i></a>
+          <a href="#"><i class="fab fa-youtube text-lg hover:text-gray-400"></i></a>
+        </div>
+      </div>
+  
+      <!-- Column 1 -->
+      <div class="space-y-3 text-sm">
+    <a href="{%url 'blog_list'%}" class="hover:underline block">Blog</a>
+        <a href="{% url 'blog_homepage'%}" class="hover:underline block">FAQs</a>
+        <a href="#" class="hover:underline block">Contact</a>
+        <!-- <a href="{% url 'login' %}" class="hover:underline block">Log In</a> -->
+      </div>
+  
+      <!-- Column 2 -->
+      <div class="space-y-3 text-sm">
+        <a href="{% url 'about' %}" class="hover:underline block">About</a>
+        <a href="#" class="hover:underline block">BlogBattle</a>
+        <a href="#" class="hover:underline block">Terms & Conditions</a>
+      </div>
+  
+      <!-- Email Sign-Up -->
+      <div>
+        <h3 class="text-xs font-semibold text-gray-400 tracking-widest mb-2">SIGN UP FOR EMAILS</h3>
+        <p class="text-sm mb-4">Get to know about everything we offer for you to read or publish.</p>
+        <form class="flex w-full">
+          <input type="email" placeholder="Email"
+            class="w-full px-3 py-2 rounded-l-md text-sm text-black focus:outline-none">
+          <a href="{% url 'signup' %}"><button type="submit"
+            class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 text-sm font-semibold rounded-r-md ">
+            Sign Me Up
+          </button></a>
         </form>
       </div>
-
-      <!-- Features -->
-      <div>
-        <h4 class="text-white font-semibold mb-3 text-lg">Features</h4>
-        <ul class="space-y-2 text-sm">
-          <li><a href="{% url 'about' %}" class="hover:text-white transition">About</a></li>
-          <li><a href="{% url 'blog_list' %}" class="hover:text-white transition">Blog</a></li>
-          <li><a href="{% url 'write_blog' %}" class="hover:text-white transition">Write Blogs</a></li>
-          <li><a href="" class="hover:text-white transition">Quiz</a></li>
-        </ul>
-      </div>
-
-      <!-- Legal & Newsletter -->
-      <div>
-        <h4 class="text-white font-semibold mb-3 text-lg">Legal</h4>
-        <ul class="space-y-2 text-sm mb-6">
-          <li><a href="#" class="hover:text-white transition">Terms of service</a></li>
-          <li><a href="#" class="hover:text-white transition">Privacy policy</a></li>
-          <li><a href="#" class="hover:text-white transition">License</a></li>
-        </ul>
-
-
-      </div>
-
-    </div>
-
-    <!-- Bottom -->
-    <div class="mt-10 border-t border-gray-700 pt-6 text-center text-sm text-gray-500">
-      © 2024 BlogVerse, Inc. All rights reserved.
     </div>
   </footer>
+  
 
   <script>
 
