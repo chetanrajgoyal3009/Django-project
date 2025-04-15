@@ -3,24 +3,25 @@
 
 {% block content %}
 <style>
-    body {
+    .edit-page {
         background-image: url("{% static 'images/2.png' %}");
         background-size: cover;
         background-attachment: fixed;
         background-blend-mode: darken;
         font-family: ui-sans-serif, system-ui, sans-serif;
+        padding-bottom: 30px;
     }
 
-    h2 {
+    .edit-page h2 {
         padding-top: 10px;
         text-align: center;
         letter-spacing: 2px;
         font-size: 30px;
         color: #c0c0c0;
-        font-family: ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+        font-family: inherit;
     }
 
-    .edit-container {
+    .edit-page .edit-container {
         margin: auto;
         margin-top: 30px;
         max-width: 1000px;
@@ -28,13 +29,12 @@
         box-shadow: 0 0 8px #9786a8;
         position: relative;
         border-radius: 15px;
-        /* background: linear-gradient(35deg, rgba(40, 39, 52, 1) 0%, rgba(20, 20, 89, 1) 75%, rgba(40, 39, 52, 1) 100%); */
         padding: 10px 30px;
-        margin-bottom:30px;
-        background-color:rgb(17 24 39);
+        margin-bottom: 30px;
+        background-color: rgb(17 24 39);
     }
 
-    .close {
+    .edit-page .close {
         background-color: transparent;
         border: none;
         position: absolute;
@@ -43,23 +43,23 @@
         cursor: pointer;
     }
 
-    .close img {
+    .edit-page .close img {
         width: 30px;
     }
 
-    .close:hover {
+    .edit-page .close:hover {
         scale: 1.1;
     }
 
-    form {
+    .edit-page form {
         margin-top: 50px;
         display: flex;
         flex-direction: column;
         gap: 15px;
     }
 
-    input[type="text"],
-    textarea {
+    .edit-page input[type="text"],
+    .edit-page textarea {
         padding: 8px 10px;
         width: 100%;
         background-color: rgb(238, 237, 237);
@@ -69,47 +69,36 @@
         border: none;
     }
 
-    
-    #titleInput {
+    .edit-page #titleInput {
         height: 50px;
         font-size: 1.2rem;
     }
 
-    textarea {
+    .edit-page textarea {
         min-height: 300px;
         resize: none;
     }
 
-    /* .custom-file-upload {
+    .edit-page .custom-file-upload {
         display: inline-flex;
         align-items: center;
         gap: 10px;
-       
+        background-color: #615fff;
         color: #ece2d5;
         padding: 10px 15px;
         cursor: pointer;
         border-radius: 5px;
+        width: 130px;
+        margin-bottom: 10px;
+        font-size: 9pt;
         font-weight: 600;
-    } */
-    .custom-file-upload {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background-color: #615fff;
-            color: #ece2d5;
-            padding: 10px 15px;
-            /* border: 1px solid #ece2d5; */
-            cursor: pointer;
-            border-radius: 5px;
-            width: 160px;
-            margin-bottom: 10px;
-        }
+    }
 
-    #fileInput {
+    .edit-page #fileInput {
         display: none;
     }
 
-    input[type="submit"] {
+    .edit-page .Update {
         background-color: #615fff;
         color: #ece2d5;
         width: 100px;
@@ -121,58 +110,43 @@
         font-weight: 600;
     }
 
-    input[type="submit"]:hover {
+    .edit-page .Update:hover {
         cursor: pointer;
         scale: 1.1;
         transition: ease-in-out 0.2s;
         box-shadow: 0 0 8px #615fff;
     }
 
-    /* a.cancel-link {
-        display: block;
-        text-align: center;
-        margin-top: 20px;
-        color: #ece2d5;
-        text-decoration: none;
-    }
-
-    a.cancel-link:hover {
-        color: red;
-        transition: ease-in-out 0.2s;
-        scale: 1.1;
-    } */
-
-    label {
+    .edit-page label {
         color: #ece2d5;
         font-weight: 500;
     }
 </style>
 
-<div class="edit-container">
-    <a href="{% url 'blog_detail' post.id %}">
-        <button class="close">
-            <img src="{% static 'images/cross.png' %}" alt="Close">
-        </button>
-    </a>
+<div class="edit-page">
+    <div class="edit-container">
+        <a href="{% url 'blog_detail' post.id %}">
+            <button class="close">
+                <img src="{% static 'images/cross.png' %}" alt="Close">
+            </button>
+        </a>
 
-    <h2><b>Edit Post</b></h2>
+        <h2><b>Edit Post</b></h2>
 
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        <label for="id_title">Title</label>
-        <input type="text" name="title" id="titleInput" value="{{ form.title.value }}" required>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label for="id_title">Title</label>
+            <input type="text" name="title" id="titleInput" value="{{ form.title.value }}" required>
 
-        <label for="id_content">Content</label>
-        <textarea name="content" required>{{ form.content.value }}</textarea>
+            <label for="id_content">Content</label>
+            <textarea name="content" required>{{ form.content.value }}</textarea>
 
-        <label for="fileInput">Image</label>
-        <label for="fileInput" class="custom-file-upload" id="fileLabel">Choose an image</label>
-        <input type="file" id="fileInput" name="image" accept="image/*">
+            <label for="fileInput" class="custom-file-upload" id="fileLabel">Choose an image</label>
+            <input type="file" id="fileInput" name="image" accept="image/*">
 
-        <input type="submit" value="Update">
-    </form>
-
-    
+            <input class="Update" type="submit" value="Update">
+        </form>
+    </div>
 </div>
 
 <script>

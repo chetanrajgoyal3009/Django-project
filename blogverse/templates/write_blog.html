@@ -2,189 +2,164 @@
 {% load static %}
 
 {% block content %}
-<!DOCTYPE html>
-<html lang="en">
-    
+<style>
+    .blog-post-page h2 {
+        padding-top: 10px;
+        text-align: center;
+        letter-spacing: 2px;
+        font-size: 30px;
+        color: #c0c0c0;
+        font-family: ui-sans-serif, system-ui, sans-serif;
+    }
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BLOGVERSE</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    .blog-post-page {
+        background-image: url("{% static 'images/2.png' %}");
+        background-size: cover;
+        background-attachment: fixed;
+        background-blend-mode: darken;
+        font-family: ui-sans-serif, system-ui, sans-serif;
+        padding-bottom: 30px;
+    }
 
+    .blog-post-page .close {
+        background-color: transparent;
+        border: none;
+        position: absolute;
+        top: 20px;
+        left: 94%;
+        cursor: pointer;
+    }
 
-    <style>
-        h2 {
-            padding-top: 10px;
-            text-align: center;
-            letter-spacing: 2px;
-            font-size: 30px;
-            color: #c0c0c0;
-            font-family: ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  
-        }
+    .blog-post-page .close img {
+        width: 30px;
+    }
 
-        body {
-            background-image: url("{% static 'images/2.png' %}");
-            background-size: cover;
-            background-attachment: fixed;
-            background-blend-mode: darken;
-            font-family: ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    .blog-post-page .close:hover {
+        scale: 1.1;
+    }
 
-        }
+    .blog-post-page .inputs {
+        padding: 8px 10px;
+        width: 100%;
+        height: 30px;
+        background-color: rgb(238, 237, 237);
+        font-size: 1.01rem;
+        color: #1b1728;
+        border-radius: 5px;
+    }
 
-        .close {
-            background-color: #b7b7b800;
-            border: none;
-            position: absolute;
-            top: 20px;
-            left: 94%;
-            cursor: pointer;
-        }
+    .blog-post-page #titleInput {
+        height: 50px;
+        font-size: 1.2rem;
+    }
 
-        .close img {
-            width: 30px;
-        }
+    .blog-post-page .inputs:focus {
+        outline: none;
+        color: black;
+    }
 
-        .close:hover {
-            scale: 1.1;
-        }
+    .blog-post-page input.Post {
+        background-color: #615fff;
+        color: #ece2d5;
+        width: 100px;
+        height: 40px;
+        position: absolute;
+        right: 25px;
+        bottom: 20px;
+        font-weight: 600;
+    }
 
-        .inputs {
-            /* border: 2px solid #615fff; */
-            padding: 8px 10px;
-            width: 100%;
-            height: 30px;
-            background-color: rgb(238, 237, 237);
-            font-size: 1.01rem;
-            color: #1b1728;
-            border-radius: 5px;
-        }
+    .blog-post-page input.Post:hover {
+        cursor: pointer;
+        scale: 1.1;
+        background-color: #615fff;
+        transition: ease-in-out 0.2s;
+        box-shadow: 0 0 8px #615fff;
+    }
 
-        #titleInput {
-            height: 50px;
-            font-size: 1.2rem;
-        }
+    .blog-post-page #blog {
+        min-height: 300px;
+        margin-top: 20px;
+        resize: none;
+    }
 
-        .inputs:focus {
-            outline: none;
-            color: black;
-        }
+    .blog-post-page .masterContainer {
+        margin: auto;
+        margin-top: 30px;
+        max-width: 1000px;
+        min-height: 620px;
+        box-shadow: 0 0 8px #9786a8;
+        position: relative;
+        border-radius: 15px;
+        padding: 10px 30px;
+        background-color: rgb(17 24 39);
+        margin-bottom: 30px;
+    }
 
-        input[type="submit"] {
-            background-color: #615fff ;
-            color: #ece2d5;
-            width: 100px;
-            height: 40px;
-            ;
-            position: absolute;
-            right: 25px;
-            bottom: 20px;
-        }
+    .blog-post-page form {
+        margin-top: 50px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
 
-        input[type="submit"]:hover {
-            cursor: pointer;
-            scale: 1.1;
-            background-color: #615fff;
-            transition: ease-in-out 0.2s;
-            box-shadow: 0 0 8px #615fff;
-        }
+    .blog-post-page .custom-file-upload {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background-color: #615fff;
+        color: #ece2d5;
+        padding: 10px 15px;
+        cursor: pointer;
+        border-radius: 5px;
+    }
 
-        #blog {
-            min-height: 300px;
-            margin-top: 20px;
-            resize: none;
-        }
+    .blog-post-page #fileLabel {
+        font-size: 9pt;
+        color: #ece2d5;
+    }
 
-        .masterContainer {
-            margin: auto;
-            margin-top: 30px;
-            max-width: 1000px;
-            min-height: 620px;
-            box-shadow: 0 0 8px #9786a8;
-            position: relative;
-            border-radius: 15px;
-            /* background: linear-gradient(35deg,rgba(40, 39, 52, 1) 0%, rgba(20, 20, 89, 1) 75%, rgba(40, 39, 52, 1) 100%);             */
-            padding: 10px 30px;
-            background-color:rgb(17 24 39);
-            margin-bottom: 30px;
-        }
+    .blog-post-page #fileInput {
+        display: none;
+    }
+</style>
 
-        form {
-            margin-top: 50px;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
+<div class="blog-post-page">
+    <div class="masterContainer">
+        <a href="{% url 'blog_list' %}">
+            <button class="close">
+                <img src="{% static 'images/cross.png' %}" alt="Close">
+            </button>
+        </a>
 
-        .custom-file-upload {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background-color: #615fff;
-            color: #ece2d5;
-            padding: 10px 15px;
-            /* border: 1px solid #ece2d5; */
-            cursor: pointer;
-            border-radius: 5px;
-        }
+        <h2><b>Create Post</b></h2>
 
-        #fileInput {
-            display: none;
-        }
-
-        span {
-            font-size: 9pt;
-            color: #ece2d5;
-        }
-    </style>
-</head>
-
-<body>
-      <!-- ✏️ ORIGINAL CONTENT STARTS HERE -->
-        <div class="masterContainer">
-            <a href="{% url 'blog_list' %}">
-                <button class="close">
-                    <img src="{% static 'images/cross.png' %}" alt="Close">
-                </button>
-            </a>
-    
-            <h2><b>Create Post</b></h2>
-    
-            <section class="form">
-                <form action="{% url 'write_blog' %}" method="POST" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <div>
-                        <input type="text" name="title" class="inputs" id="titleInput" placeholder="Give it a heading" required>
-                    </div>
-                    <div>
-                        <textarea name="content" class="inputs" id="blog" placeholder="Write your blog..." required></textarea>
-                    </div>
-                    <div>
-                        <label for="fileInput" class="custom-file-upload">
-                            <span id="fileLabel" style="font-weight:600;">Choose an image</span>
-                        </label>
-                        <input type="file" id="fileInput" name="image" accept="image/*">
-                    </div>
-                    <input type="submit" value="Post" style="font-weight:600;">
-                </form>
-            </section>
-        </div>
-
+        <section class="form">
+            <form action="{% url 'write_blog' %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div>
+                    <input type="text" name="title" class="inputs" id="titleInput" placeholder="Give it a heading" required>
+                </div>
+                <div>
+                    <textarea name="content" class="inputs" id="blog" placeholder="Write your blog..." required></textarea>
+                </div>
+                <div>
+                    <label for="fileInput" class="custom-file-upload">
+                        <span id="fileLabel" style="font-weight:600;">Choose an image</span>
+                    </label>
+                    <input type="file" id="fileInput" name="image" accept="image/*">
+                </div>
+                <input class="Post" type="submit" value="Post">
+            </form>
+        </section>
     </div>
-    <br><br>
-    
-    
-    <script>
-        document.getElementById("fileInput").addEventListener("change", function () {
-            let fileName = this.files[0] ? this.files[0].name : "Choose an image";
-            document.getElementById("fileLabel").textContent = fileName;
-        });
-    </script>
-    
+</div>
 
-</body>
-
-</html>
+<script>
+    document.getElementById("fileInput").addEventListener("change", function () {
+        let fileName = this.files[0] ? this.files[0].name : "Choose an image";
+        document.getElementById("fileLabel").textContent = fileName;
+    });
+</script>
 {% endblock %}
