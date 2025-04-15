@@ -11,9 +11,9 @@ class Profile(models.Model):
     email = models.EmailField()
     phone = models.CharField(max_length=10)
     profile_image = models.ImageField(upload_to='profile_images/', null=True, blank=True)
-    cover_photo = models.ImageField(upload_to='cover_photos/', null=True, blank=True)
 
-    def __str__(self):
+
+    def _str_(self):
         return self.name
 class BlogPost(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -21,9 +21,11 @@ class BlogPost(models.Model):
     image = models.ImageField(upload_to='blog_images/', blank=True, null=True)
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
+    profile_image = models.ImageField(upload_to='profile_images/', null=True, blank=True)
 
-    def __str__(self):
+    def _str_(self):
         return self.title
+
 
     
 class Like(models.Model):
@@ -34,6 +36,5 @@ class Like(models.Model):
     class Meta:
         unique_together = ('user', 'post')
 
-    def __str__(self):
+    def _str_(self):
         return self.title
-

@@ -1,287 +1,222 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
+{% block title_block %}Update Profile{% endblock %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
-    <title>Update Profile</title>
+{% block content %}
+<style>
+    body {
+        font-family: 'Montserrat', sans-serif;
+        background: linear-gradient(145deg, #1e1e2f, #2c2c3a);
+        min-height: 100vh;
+        color: #fff;
+        
+    }
+    main{
+        padding-top: 20px;
+        background-color: rgb(17 24 39);
+        
+    }
 
-    <style>
-        /* Global Styles */
-        * {
-            margin: 0;
-            padding: 0;
-        }
+    .profile-container {
+        
+        backdrop-filter: blur(15px);
+        background: rgba(255, 255, 255, 0.07);
+        max-width: 800px;
+        margin: auto;
+        padding: 40px;
+        border-radius: 16px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 30px;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        
+      
+    }
 
-        body {
-            background-attachment: fixed;
-        }
+    /* .profile-image {
+        flex: 0 0 120px;
+        text-align: center;
+    }
 
-        .container {
-            background: linear-gradient(35deg,rgba(40, 39, 52, 1) 0%, rgba(20, 20, 89, 1) 75%, rgba(40, 39, 52, 1) 100%);            padding: 10px 30px;
-border-radius: 1.0rem;
-            padding: 30px;
-            width: 100%;
-            max-width: 600px;
-            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-            text-align: center;
-            backdrop-filter: blur(10px);
-            animation: fadeIn 1s ease-in-out;
-            line-height: normal;
-            z-index: auto;
-            margin: auto;
-            margin-top: 20px;
-            margin-bottom: 20px;
-        }
+    .profile-image img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid #ccc;
+    } */
 
-        h2 {
-            color: #31a9ff;
-            margin-bottom: 20px;
-            font-weight: 600;
-            font-size: 32px;
-        }
+    .form-section {
+        flex: 1;
+        padding-right: 20px;
+    }
 
-        form {
-            display: flex;
+    h2 {
+        font-size: 26px;
+        margin-bottom: 20px;
+        font-weight: 700;
+        color: #fff;
+    }
+
+    form {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .form-group {
+        flex: 1 1 45%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .form-group.full-width {
+        flex: 1 1 100%;
+    }
+
+    label {
+        font-size: 15px;
+        margin-bottom: 6px;
+        font-weight: 600;
+        color: #f0f0f0;
+        letter-spacing: 0.5px;
+    }
+
+    input,
+    select,
+    textarea {
+        padding: 12px 14px;
+        font-size: 14px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 8px;
+        background-color: rgba(255, 255, 255, 0.1);
+        color: #fff;
+        transition: 0.2s;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+        color: #aaa;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+        border-color: #007bff;
+        outline: none;
+        background-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .form-buttons {
+        display: flex;
+        justify-content: flex-end;
+        gap: 12px;
+        margin-top: 20px;
+    }
+
+    .form-buttons button,
+    .form-buttons a {
+        padding: 10px 20px;
+        font-size: 14px;
+        border-radius: 8px;
+        border: none;
+        cursor: pointer;
+        transition: 0.2s ease-in-out;
+        text-decoration: none;
+        text-align: center;
+    }
+
+    .save-btn {
+        background-color: #007bff;
+        color: white;
+    }
+
+    .save-btn:hover {
+        background-color: #007bff;
+    }
+
+    .cancel-btn {
+        background-color: transparent;
+        color: #007bff;
+        border: 1px solid #007bff;
+    }
+
+    .cancel-btn:hover {
+        background-color: rgba(255, 109, 0, 0.1);
+    }
+
+    @media (max-width: 768px) {
+        .profile-container {
             flex-direction: column;
-            align-items: center;
+            padding: 30px 20px;
         }
 
-        label {
-            display: block;
-            text-align: left;
-            font-weight: 500;
-            margin-top: 10px;
-            color: rgb(230, 230, 230);
-            font-size: 18px;
-            width: 100%;
+        .form-group {
+            flex: 1 1 100%;
         }
 
-        input,
-        select,
-        textarea {
-            width: 100%;
-            max-width: 570px;
-            padding: 15px;
-            margin: 4px;
-            border: none;
-            background-color: transparent;
-            color: #ffffff;
-            font-size: 16px;
-            text-align: left;
-            outline: none;
-            transition: 0.3s;
-        }
-        input#id_name,
-        input#id_profession,
-        input#id_gender,
-        input#id_birthdate,
-        input#id_address,
-        input#id_email,
-        input#id_phone{
-            color: white;
-        }
-        #text{
-            color: white;
-        }
-        input:hover,
-        select:hover,
-        textarea:hover {
-            border-bottom: 2px solid #090741;
+        .form-buttons {
+            justify-content: center;
         }
 
-        input:focus {
-            background-color: transparent;
-            
+        .profile-image {
+            align-self: center;
         }
+    }
+</style>
 
+<div class="profile-container">
+    <!-- <div class="profile-image">
+        {% if profile.profile_image %}
+      <img src="{{ profile.profile_image.url }}" alt="Profile Image">
+      {% else %}
+        <img src="#" alt="Default Image">
+      {% endif %}
+    </div> -->
 
-
-        button {
-            background-color: #ad1f1f;
-            color: white;
-            padding: 12px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 16px;
-            width: 100%;
-            max-width: 400px;
-            margin-top: 10px;
-            transition: all 0.3s ease-in-out;
-        }
-
-        button:hover {
-            background-color: #c54545;
-            color: white;
-            transform: scale(1.05);
-        }
-
-        .btn-back {
-            display: inline-block;
-            background-color: #ad1f1f;
-            color: white;
-            padding: 12px;
-            border-radius: 8px;
-            text-decoration: none;
-            width: 100%;
-            max-width: 380px;
-            text-align: center;
-            margin-top: 10px;
-            transition: all 0.3s ease-in-out;
-        }
-
-        .btn-back:hover {
-            background-color: #c54545;
-            transform: scale(1.05);
-        }
-        input[type="file"] {
-    color: white;
-    background-color: transparent;
-    border: none;
-    font-size: 16px;
-    margin-top: 5px;
-    cursor: pointer;
-    width: 100%;
-    max-width: 570px;
-}
-
-input[type="file"]::file-selector-button {
-    background-color: #ad1f1f;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    padding: 8px 12px;
-    margin-right: 10px;
-    cursor: pointer;
-    transition: background-color 0.3s ease-in-out;
-}
-
-input[type="file"]::file-selector-button:hover {
-    background-color: #c54545;
-}
-
-
-        input[type="checkbox"] {
-            width: 18px;
-    height: 18px;
-    accent-color: #800000;
-    margin-left: 5px;
-    cursor: pointer;
-        }
-
-        input[type="checkbox"]:hover {
-            transform: scale(1.1);
-        }
-
-        a {
-            color: #ad0d0d;
-            /* Purple theme color */
-            font-weight: 500;
-            text-decoration: none;
-            transition: color 0.3s ease-in-out;
-        }
-
-        a:hover {
-            color: #820000;
-            /* Darker purple */
-            text-decoration: underline;
-        }
-
-        .clear-checkbox-container {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            /* Adds spacing between checkbox and label */
-            margin-top: 5px;
-        }
-
-
-        /* Responsive Design */
-        @media (max-width: 480px) {
-            .container {
-                width: 100%;
-                padding: 20px;
-                max-width: 200px;
-                font-size: 10px;
-            }
-
-            input,
-            select,
-            textarea {
-                font-size: 14px;
-            }
-
-            input:hover,
-            select:hover,
-            textarea:hover {
-                border-bottom: 2px solid #800000;
-            }
-
-        }
-
-        /* Animations */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-    </style>
-</head>
-
-<body>
-    {%extends 'base.html'%}
-    {%block content%}
-    <div class="container">
-        <h2>Update Profile</h2>
+    <div class="form-section">
+        <h2>Edit Profile</h2>
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
-
-            <label for="name" class="name-label">Name:</label>
-            {{ form.name }}
-
-
-            <label for="profession" class="profession-label">Profession:</label>
-            {{ form.profession }}
-
-            <label for="gender" class="gender-label">Gender:</label>
-            {{ form.gender }}
-
-            <label for="birthdate" class="birthdate-label">Birthdate:</label>
-            {{ form.birthdate }}
-
-            <label for="address" class="address-label">Address:</label>
-            {{ form.address }}
-
-            <label for="email" class="email-label">Email:</label>
-            {{ form.email }}
-
-            <label for="phone" class="phone-label">Phone:</label>
-            {{ form.phone }}
-
-
-            <label for="profile_image" class="profile-image-label">Profile Image:</label>
-            {{ form.profile_image }}
-            {{ form.profile_image.clear }}
-
-
-            <label for="cover_photo" class="cover-photo-label">Cover Photo:</label>
-            {{ form.cover_photo }}
-
-            <button type="submit">Save Changes</button>
+            <div class="form-group">
+                <label for="name">Name</label>
+                {{ form.name }}
+            </div>
+            <div class="form-group">
+                <label for="profession">Profession</label>
+                {{ form.profession }}
+            </div>
+            <div class="form-group">
+                <label for="gender">Gender</label>
+                {{ form.gender }}
+            </div>
+            <div class="form-group">
+                <label for="birthdate">Birthdate</label>
+                {{ form.birthdate }}
+            </div>
+            <div class="form-group full-width">
+                <label for="address">Address</label>
+                {{ form.address }}
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                {{ form.email }}
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone</label>
+                {{ form.phone }}
+            </div>
+            <div class="form-group full-width">
+                <label for="profile_image">Profile Image</label>
+                {{ form.profile_image }}
+                {{ form.profile_image.clear }}
+            </div>
+            <div class="form-buttons">
+                <a href="{% url 'profile_view' %}" class="cancel-btn">Cancel</a>
+                <a href="{% url 'profile_view' %}"><button type="submit" class="save-btn">Save</button></a>
+            </div>
         </form>
-
-        <a href="{% url 'profile_view' %}" class="btn-back">Back to Profile</a>
     </div>
-    {%endblock%}
-</body>
-
-</html>
+</div>
+{% endblock %}

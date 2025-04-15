@@ -178,9 +178,9 @@
             {% for post in posts %}
             <div class="post-container">
                 <div class="profile-details">
-                    <img src="{{ request.profile_image.url }}" alt="Profile Picture">
+                    <img src="{{ post.user.profile.profile_image.url }}" alt="Profile Picture">
                     <div>
-                        <h2>{{ request.user.username }}</h2>
+                        <h2>{{ post.user.username }}</h2>
                         <h4>{{ post.created_at|date:"F d, Y, h:i A" }}</h4>
                     </div>
                     <a href="#">Follow</a>
@@ -229,10 +229,10 @@
         document.querySelectorAll(".like-btn").forEach(button => {
             button.addEventListener("click", function () {
                 const postId = this.getAttribute("data-post-id");
-                const likeCount = document.getElementById(`like-count-${postId}`);
+                const likeCount = document.getElementById(like-count-${postId});
                 const likeIcon = this.querySelector(".like-icon");
 
-                fetch(`/like/${postId}/`, {
+                fetch(/like/${postId}/, {
                     method: "POST",
                     headers: {
                         "X-Requested-With": "XMLHttpRequest",

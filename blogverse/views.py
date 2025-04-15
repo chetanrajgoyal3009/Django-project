@@ -80,7 +80,7 @@ def blog_list(request):
     query = request.GET.get('q')  # Get search query from the URL
     if query:
         posts = BlogPost.objects.filter(
-            Q(title__icontains=query) | Q(content__icontains=query)
+            Q(title_icontains=query) | Q(content_icontains=query)
         ).order_by('-created_at')
     else:
         posts = BlogPost.objects.all().order_by('-created_at')
@@ -102,6 +102,9 @@ def write_blog(request):
             return redirect('blog_list')
     else:
         form = BlogPostForm()
+    
+    messages.success(request, 'Your blog post has been published!')
+
 
     return render(request, 'write_blog.html', {'form': form})
 
@@ -129,16 +132,18 @@ def post_detail(request, post_id):
 def profile_view(request):
     profile, created = Profile.objects.get_or_create(
         user=request.user,
-        defaults={'birthdate': date(2000, 1, 1)}  # or date.today(), anything valid
+        # defaults={'birthdate': date(2000, 1, 1)}  # or date.today(), anything valid
     )
     blogs = BlogPost.objects.filter(user=request.user)
     return render(request, 'profile.html', {'profile': profile, 'blogs': blogs})
 
 
 
+
 @login_required
 def update_profile(request):
     profile = get_object_or_404(Profile, user=request.user)
+    
     if request.method == 'POST':
         form = ProfileForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
@@ -146,11 +151,32 @@ def update_profile(request):
             return redirect('profile_view')
     else:
         form = ProfileForm(instance=profile)
+    
     return render(request, 'update_profile.html', {'form': form})
 
+@login_required
+def logout_view(request):
+    logout(request)
+    messages.success(request, "You have been logged out.")
+    return redirect('login')
 
 
+@login_required
+def update_blog(request, post_id):
+    post = get_object_or_404(BlogPost, id=post_id)
+    
+    if request.method == 'POST':
+        form = BlogPostForm(request.POST, request.FILES, instance=post)
+        if form.is_valid():
+            form.save()
+            return redirect('blog_detail', post_id=post.id)
+    else:
+        form = BlogPostForm(instance=post)
+    
+    return render(request, 'update_blog.html', {'form': form, 'post': post})
 
-
-
-
+@login_required
+def delete_blog(request, blog_id):
+    blog = get_object_or_404(BlogPost, id=blog_id, user=request.user)
+    blog.delete()
+    return redirect('profile_view')
