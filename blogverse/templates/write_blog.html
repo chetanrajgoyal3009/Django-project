@@ -19,7 +19,19 @@
         background-blend-mode: darken;
         font-family: ui-sans-serif, system-ui, sans-serif;
         padding-bottom: 30px;
+        animation: slideIn 1s ease-in-out;
     }
+    @keyframes slideIn {
+            from {
+                transform: translateX(50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
 
     .blog-post-page .close {
         background-color: transparent;
@@ -95,6 +107,17 @@
         padding: 10px 30px;
         background-color: rgb(17 24 39);
         margin-bottom: 30px;
+        animation: fadeIn 1s ease-in-out;
+        
+    }
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
     }
 
     .blog-post-page form {
