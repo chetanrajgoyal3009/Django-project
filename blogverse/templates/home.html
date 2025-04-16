@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Animated Background Change</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"="sha512-dCDW6gkVbc1sIuVbV9ZnK1A+VLx+lZfCqJ0uykNQp6bx9ly8qT+uP9DqX4T+PG3b6b96sUorD1wEb6HQeM2vLw=="crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 
 
@@ -442,6 +443,12 @@
       background-position: center;
       /* Centers the image */
       background: linear-gradient(to right, #1e3c72, #2a5298);
+      background-image: url(https://img.freepik.com/free-vector/white-world-map_23-2147509768.jpg?t=st=1744724991~exp=1744728591~hmac=486db18d4b840bb8cb18aa2f130b7db30edbcb2adf0a29d596deca70068a3967&w=826);
+      background-size: cover; /* Scales the image to cover the entire div */
+  background-position: center; /* Centers the image */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+  position: relative; /* For pseudo-element positioning */
+  overflow: hidden; /* Ensures animations stay within bounds */
       background-size: cover;
       /* Ensures it covers the whole div */
       color: rgb(0, 0, 0);
@@ -470,7 +477,7 @@
 
     /* CTA Button */
     #create {
-      background: #2c3e50;
+      background: #d3deea;
       color: white;
       font-size: 1rem;
       padding: 12px 20px;
@@ -489,6 +496,8 @@
     /* Blogger Markers */
     .blogger-markers {
       position: absolute;
+      
+
       top: 0;
       left: 0;
       width: 100%;
@@ -550,7 +559,8 @@
     .feedback-carousel {
       width: 100%;
       overflow: hidden;
-      background: linear-gradient(135deg, #0f172a, #1e3a8a);
+      /* background: linear-gradient(135deg, #0f172a, #1e3a8a); */
+      background-color: #34495e;
       /* dark bluish gradient */
       padding: 40px 0;
       position: relative;
@@ -688,7 +698,129 @@
     .faq.open .icon {
       transform: rotate(90deg);
     }
-  </style>
+    
+    .quiz-links-quotes {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* vertical center */
+  align-items: center;     /* horizontal center */
+
+  text-align: center;
+  padding: 20px;
+  color: rgb(248, 248, 248);
+  border-radius: 5px;
+  width: 100%;
+  height: 500px;
+  margin: 20px auto;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  overflow: hidden;
+}
+
+.quiz-links-quotes::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 80%;
+  height: 80%;
+  background: inherit;
+  filter: blur(8px);
+  z-index: -1;
+}
+
+@keyframes backgroundZoom {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+.quote {
+  font-weight: 900;
+  font-size: larger;
+  font-family: 'Arial Black', Gadget, sans-serif;
+  font-style: italic;
+  margin: 15px 0;
+  opacity: 0;
+  animation: fadeIn 1.5s ease-in forwards;
+}
+.quote:nth-child(1) { animation-delay: 0.5s; }
+.quote:nth-child(2) { animation-delay: 1s; }
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.links {
+  list-style: none;
+  padding: 0;
+}
+.links li {
+  margin: 10px 0;
+  opacity: 0;
+  animation: slideIn 1.2s ease-out forwards;
+}
+.links li:nth-child(1) { animation-delay: 1.5s; }
+.links li:nth-child(2) { animation-delay: 1.8s; }
+.links li:nth-child(3) { animation-delay: 2.1s; }
+
+.links a {
+  font-family: 'Arial Black', Gadget, sans-serif;
+  text-decoration: none;
+  color: #fbfbfb;
+  font-weight: 900;
+  transition: color 0.3s;
+}
+.links a:hover {
+  color: #f7f7f7;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-5px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+button {
+ 
+  font-family: 'Arial Black', Gadget, sans-serif;
+  padding: 12px 24px;
+  background-color: #ededed;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+ 
+  font-weight: 900;
+  transition: transform 0.3s, background-color 0.3s;
+}
+.glow-button {
+    background-color: #111;
+    color: #fff;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px #e2167c, 0 0 20px #df0fca, 0 0 40px #f43fe7;
+
+
+
+  }
+
+  .glow-button:hover {
+    box-shadow: 0 0 10px #e2167c, 0 0 20px #df0fca, 0 0 40px #f43fe7;
+    transform: scale(1.05);
+  }
+button:hover {
+  transform: scale(1.05);
+  background-color: #e7ebef;
+}
+</style>
 </head>
 
 <body>
@@ -730,6 +862,16 @@
     </div>
   </div>
 
+  <div class="quiz-links-quotes"style="background-image: url({% static 'images/neon-gaming-background.jpg' %});">
+    <!-- Quotes with fade-in animation -->
+    <p class="quote">Put your knowledge to the test with our exciting quiz — it's fun and rewarding!</p>
+    <p class="quote">Take the challenge — see how much you really know!</p>
+
+    <!-- Links with slide-in animation -->
+  
+    <!-- Button with pulse animation -->
+    <button class = glow-button onclick="window.location.href='/quiz'">Take the Quiz Now!</button>
+  </div>
 <div class="relative isolate bg-white px-6 py-24 sm:py-32 lg:px-8">
             <div class="absolute inset-x-0 -top-3 -z-10 transform-gpu overflow-hidden px-36 blur-3xl" aria-hidden="true">
               <div class="mx-auto aspect-1155/678 w-[72.1875rem] bg-linear-to-tr from-[#ff80b5] to-[#9089fc] opacity-30" style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"></div>
@@ -752,13 +894,13 @@
                     <svg class="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
                       <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd" />
                     </svg>
-                    25 products
+                    SEO tools
                   </li>
                   <li class="flex gap-x-3">
                     <svg class="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
                       <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd" />
                     </svg>
-                    Up to 10,000 subscribers
+                    Unlimited blog posts
                   </li>
                   <li class="flex gap-x-3">
                     <svg class="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
@@ -787,7 +929,7 @@
                     <svg class="h-6 w-5 flex-none text-indigo-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
                       <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd" />
                     </svg>
-                    Unlimited products
+                    Advanced analytics & reports
                   </li>
                   <li class="flex gap-x-3">
                     <svg class="h-6 w-5 flex-none text-indigo-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
@@ -805,13 +947,13 @@
                     <svg class="h-6 w-5 flex-none text-indigo-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
                       <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd" />
                     </svg>
-                    Dedicated support representative
+                    Priority customer support
                   </li>
                   <li class="flex gap-x-3">
                     <svg class="h-6 w-5 flex-none text-indigo-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
                       <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd" />
                     </svg>
-                    Marketing automations
+                    Media uploads up to 5GB
                   </li>
                   <li class="flex gap-x-3">
                     <svg class="h-6 w-5 flex-none text-indigo-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
@@ -899,6 +1041,225 @@
         </div>
       </div>
       <div class="feedback-card">
+        <p>"Your blog is a goldmine of creativity! Each post sparks new ideas and is a joy to read."</p>
+        <div class="profile">
+          <img src="https://img.freepik.com/free-photo/waist-up-portrait-handsome-serious-unshaven-male-keeps-hands-together-dressed-dark-blue-shirt-has-talk-with-interlocutor-stands-against-white-wall-self-confident-man-freelancer_273609-16320.jpg?t=st=1744705164~exp=1744708764~hmac=ad56b8303d8b76ae3d644ed72d201583243e60b58db66f800be9753e9ea40580&w=996" alt="Sofia R.">
+          <div class="profile-info">
+            <h4>Sofia R.</h4>
+            <p>Graphic Designer</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="feedback-card">
+        <p>"I’m constantly inspired by the depth and beauty of your posts. Your blog is truly unique."</p>
+        <div class="profile">
+          <img src="https://img.freepik.com/free-photo/waist-up-portrait-handsome-serious-unshaven-male-keeps-hands-together-dressed-dark-blue-shirt-has-talk-with-interlocutor-stands-against-white-wall-self-confident-man-freelancer_273609-16320.jpg?t=st=1744705164~exp=1744708764~hmac=ad56b8303d8b76ae3d644ed72d201583243e60b58db66f800be9753e9ea40580&w=996" alt="Arjun K.">
+          <div class="profile-info">
+            <h4>Arjun K.</h4>
+            <p>UI/UX Designer</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="feedback-card">
+        <p>"Every visit to your blog feels like a creative adventure. The visuals are breathtaking!"</p>
+        <div class="profile">
+          <img src="https://img.freepik.com/premium-photo/smiling-pretty-young-eastern-woman-gesturing-blue_116547-96874.jpg?w=996" alt="Maya L.">
+          <div class="profile-info">
+            <h4>Maya L.</h4>
+            <p>Content Strategist</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="feedback-card">
+        <p>"Your blog blends insight and artistry so well. It’s become my go-to for inspiration."</p>
+        <div class="profile">
+          <img src="{% static 'images/taniya.png' %}" alt="Vikram S.">
+          <div class="profile-info">
+            <h4>Vikram S.</h4>
+            <p>Frontend Developer</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="feedback-card">
+        <p>"The storytelling in your posts is captivating. I always leave feeling inspired."</p>
+        <div class="profile">
+          <img src="{% static 'images/loomba.jpg' %}" alt="Anita P.">
+          <div class="profile-info">
+            <h4>Anita P.</h4>
+            <p>Illustrator</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="feedback-card">
+        <p>"Your blog is a perfect mix of creativity and practicality. I’m hooked!"</p>
+        <div class="profile">
+          <img src="{% static 'images/kunal.jpg' %}" alt="Rahul M.">
+          <div class="profile-info">
+            <h4>Rahul M.</h4>
+            <p>Product Manager</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="feedback-card">
+        <p>"I love how your posts inspire me to think outside the box. Truly exceptional content!"</p>
+        <div class="profile">
+          <img src="{% static 'images/tanu.jpg' %}" alt="Priya T.">
+          <div class="profile-info">
+            <h4>Priya T.</h4>
+            <p>Digital Marketer</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="feedback-card">
+        <p>"Your blog’s visuals and insights are unmatched. It’s a creative haven!"</p>
+        <div class="profile">
+          <img src="{% static 'images/chetanimage.jpg' %}" alt="Nikhil B.">
+          <div class="profile-info">
+            <h4>Nikhil B.</h4>
+            <p>Motion Designer</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="feedback-card">
+        <p>"Each post feels like a masterclass in creativity. Your blog is a must-read!"</p>
+        <div class="profile">
+          <img src="{% static 'images/muskann.png' %}" alt="Lila K.">
+          <div class="profile-info">
+            <h4>Lila K.</h4>
+            <p>Art Director</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="feedback-card">
+        <p>"Your blog has reignited my passion for design. Every post is a gem."</p>
+        <div class="profile">
+          <img src="{% static 'images/kunal.jpg' %}" alt="Aryan D.">
+          <div class="profile-info">
+            <h4>Aryan D.</h4>
+            <p>Web Designer</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="feedback-card">
+        <p>"The way you weave stories and visuals is inspiring. Your blog stands out!"</p>
+        <div class="profile">
+          <img src="{% static 'images/loomba.jpg' %}" alt="Tara N.">
+          <div class="profile-info">
+            <h4>Tara N.</h4>
+            <p>Copywriter</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="feedback-card">
+        <p>"Your blog is a breath of fresh air. It’s both inspiring and beautifully crafted."</p>
+        <div class="profile">
+          <img src="{% static 'images/tanu.jpg' %}" alt="Kiran V.">
+          <div class="profile-info">
+            <h4>Kiran V.</h4>
+            <p>Photographer</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="feedback-card">
+        <p>"I’m amazed by the creativity in every post. Your blog is a true masterpiece."</p>
+        <div class="profile">
+          <img src="{% static 'images/chetanimage.jpg' %}" alt="Sneha R.">
+          <div class="profile-info">
+            <h4>Sneha R.</h4>
+            <p>Creative Consultant</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="feedback-card">
+        <p>"Your blog’s content is so engaging, I can’t stop reading! It’s a creative spark."</p>
+        <div class="profile">
+          <img src="{% static 'images/loomba.jpg' %}" alt="Aditya G.">
+          <div class="profile-info">
+            <h4>Aditya G.</h4>
+            <p>Game Developer</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="feedback-card">
+        <p>"The blend of visuals and insights on your blog is phenomenal. I’m a huge fan!"</p>
+        <div class="profile">
+          <img src="{% static 'images/tanu.jpg' %}" alt="Meera S.">
+          <div class="profile-info">
+            <h4>Meera S.</h4>
+            <p>Fashion Designer</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="feedback-card">
+        <p>"Your blog is my go-to for creative ideas. Each post is a work of art."</p>
+        <div class="profile">
+          <img src="{% static 'images/chetanimage.jpg' %}" alt="Rohan J.">
+          <div class="profile-info">
+            <h4>Rohan J.</h4>
+            <p>Video Editor</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="feedback-card">
+        <p>"I’m always excited to see your new posts. Your blog is pure inspiration!"</p>
+        <div class="profile">
+          <img src="{% static 'images/chetanimage.jpg' %}" alt="Ishita M.">
+          <div class="profile-info">
+            <h4>Ishita M.</h4>
+            <p>Social Media Manager</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="feedback-card">
+        <p>"Your blog’s creativity and depth keep me coming back. It’s exceptional!"</p>
+        <div class="profile">
+          <img src="{% static 'images/loomba.jpg' %}" alt="Dev P.">
+          <div class="profile-info">
+            <h4>Dev P.</h4>
+            <p>Software Engineer</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="feedback-card">
+        <p>"Every post on your blog feels like a creative journey. I absolutely love it!"</p>
+        <div class="profile">
+          <img src="{% static 'images/kunal.jpg' %}" alt="Nia T.">
+          <div class="profile-info">
+            <h4>Nia T.</h4>
+            <p>Animator</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="feedback-card">
+        <p>"Your blog is a masterpiece of design and content. It’s truly inspiring."</p>
+        <div class="profile">
+          <img src="https://img.freepik.com/free-photo/waist-up-portrait-handsome-serious-unshaven-male-keeps-hands-together-dressed-dark-blue-shirt-has-talk-with-interlocutor-stands-against-white-wall-self-confident-man-freelancer_273609-16320.jpg?t=st=1744705164~exp=1744708764~hmac=ad56b8303d8b76ae3d644ed72d201583243e60b58db66f800be9753e9ea40580&w=996" alt="Kabir W.">
+          <div class="profile-info">
+            <h4>Kabir W.</h4>
+            <p>Brand Strategist</p>
+          </div>
+        </div>
+      </div>
+      <div class="feedback-card">
         <p>"I stumbled upon your blog while looking for creative inspiration. Every post feels thoughtfully crafted and
           visually stunning."</p>
         <div class="profile">
@@ -974,10 +1335,10 @@
       you’re in good company on Blogger. Sign up to discover why millions of people
       have published their passions here.
     </p>
-    <button class="cta-button" id="create">CREATE YOUR BLOG</button>
+    <button class="cta-button" id="create"><i class="fa-brands fa-discord" style="color: #ffffff;"></i>DISCORD</button>
 
     <!-- Animated Blogger Markers -->
-    <div class="blogger-markers" style="background-image: ;">
+    <div class="blogger-markers" >
       <div class="marker" style="top: 15%; left: 10%;"><img src="{% static 'images/logo.png' %}"></div>
       <!-- <div class="marker" style="top: 25%; left: 35%;"><img src="avatar1.png"></div> -->
       <!-- <div class="marker" style="top: 35%; left: 60%;"><img src="post.png"></div> -->
