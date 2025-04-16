@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Results</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 2rem;
+            background-color: #f0f2f5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .score-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 2rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .score-number {
+            font-size: 3.5rem;
+            color: #2c3e50;
+            font-weight: 700;
+        }
+
+        .chart-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .leaderboard {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+        }
+
+        .correct { color: #27ae60; }
+        .total { color: #2980b9; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="score-header">
+            <h1>Quiz Results</h1>
+            <div class="score-number">
+                <span class="correct">{{ score }}</span> /
+                <span class="total">{{ total }}</span>
+            </div>
+            <p>{{ percentage }}% Correct Answers</p>
+        </div>
+
+        <div class="chart-container">
+            <canvas id="scoreChart"></canvas>
+        </div>
+
+        <div class="leaderboard">
+            <h2>Top Performers</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Username</th>
+                        <th>Score</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for entry in leaderboard %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ entry.username }}</td>
+                        <td>{{ entry.score }}/{{ entry.total }}</td>
+                        <td>{{ entry.date|date:"M d, Y" }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // Pie chart configuration
+        const ctx = document.getElementById('scoreChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Correct Answers', 'Wrong Answers'],
+                datasets: [{
+                    data: [{{ score }}, {{ total|add:"-score" }}],
+                    backgroundColor: ['#27ae60', '#e74c3c'],
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { position: 'bottom' },
+                    tooltip: { enabled: true }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

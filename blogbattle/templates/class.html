@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz Review Page</title>
+  <style>
+    /* Original styles from class.html */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      margin: 0;
+      height: 100vh;
+      background-color: #f9fafb;
+    }
+    .sidebar {
+      width: 12%;
+      background-color: #161b22;
+      padding: 10px;
+      color: white;
+      box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    }
+    .sidebar ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    .sidebar li {
+      padding: 10px;
+      margin: 5px 0;
+      cursor: pointer;
+      border: #178dd6 solid 1px;
+      background-color: #161b22;
+      border-radius: 5px;
+      text-align: center;
+      transition: background-color 0.3s;
+    }
+    .sidebar li:hover, .sidebar li.active {
+      background-color: #58a6ff;
+      color: white;
+    }
+    .sidebar li.answered:not(.active) {
+      background-color: #238636;
+      color: white;
+    }
+    .content {
+      flex: 1;
+      padding: 40px;
+      background-color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .question {
+      font-size: 28px;
+      margin-bottom: 30px;
+      color: #0d1117;
+      font-weight: 600;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.5s forwards;
+    }
+    .options {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.5s forwards;
+      animation-delay: 0.2s;
+    }
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .options label {
+      display: block;
+      margin-bottom: 15px;
+      cursor: pointer;
+      background-color: #f1f1f1;
+      padding: 12px 16px;
+      border-radius: 6px;
+      transition: background-color 0.3s;
+      border: 1px solid #aaaaaa;
+    }
+    .options label:hover {
+      background-color: #e2e6ea;
+    }
+    .nav-buttons {
+      margin-top: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .nav-buttons .left-buttons,
+    .nav-buttons .right-buttons {
+      display: flex;
+    }
+    .nav-buttons button {
+      background-color: #178dd6;
+      color: white;
+      padding: 10px 20px;
+      margin-right: 10px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s;
+    }
+    .nav-buttons button:hover {
+      background-color: #4a60cf;
+    }
+    #timer {
+  font-size: 20px;
+  color: rgb(255, 255, 255);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: absolute;
+  bottom: 20px;
+  padding: 12px 20px;
+  background: transparent;
+
+}
+  </style>
+</head>
+<body>
+  
+  <div class="sidebar">
+    <ul id="questionList"></ul>
+    <div id="timer"></div>
+  </div>
+  <div class="content">
+    <div>
+      <div class="question" id="questionText">Loading questions...</div>
+      <div class="options" id="optionsContainer"></div>
+    </div>
+    <div class="nav-buttons">
+      <div class="left-buttons">
+        <button onclick="previousQuestion()">Previous</button>
+        <button id="nextBtn" onclick="nextQuestion()">Next</button>
+      </div>
+      <div class="right-buttons">
+        <button onclick="submitAnswers()">Submit Quiz</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let questions = [];
+    let currentQuestion = 0;
+    let answers = [];
+    let timerInterval;
+
+    // Load questions from localStorage
+    try {
+      const storedData = localStorage.getItem('quizQuestions');
+      if (storedData) {
+        questions = JSON.parse(storedData);
+        answers = Array(questions.length).fill(null);
+      }
+    } catch (e) {
+      alert("Invalid quiz data found in localStorage.");
+      questions = [];
+    }
+
+    // Initialize UI
+    const questionList = document.getElementById("questionList");
+    const questionText = document.getElementById("questionText");
+    const optionsContainer = document.getElementById("optionsContainer");
+    const nextBtn = document.getElementById("nextBtn");
+    const timerDiv = document.getElementById("timer");
+
+    function initializeQuiz() {
+      if (questions.length === 0) {
+        questionText.textContent = "No quiz questions found. Please generate a quiz first.";
+        return;
+      }
+
+      // Populate sidebar
+      questionList.innerHTML = '';
+      questions.forEach((_, index) => {
+        const li = document.createElement("li");
+        li.textContent = `Q${index + 1}`;
+        li.addEventListener("click", () => displayQuestion(index, li));
+        questionList.appendChild(li);
+      });
+
+      // Start timer
+      startTimer(300); // 5 minutes timer
+
+      // Show first question
+      displayQuestion(0);
+    }
+
+    function displayQuestion(index, clickedElement = null) {
+      currentQuestion = index;
+      const current = document.querySelector(".sidebar li.active");
+      if (current) current.classList.remove("active");
+      const targetElement = clickedElement || questionList.children[index];
+      targetElement.classList.add("active");
+
+      // Reset animations
+      questionText.style.animation = 'none';
+      optionsContainer.style.animation = 'none';
+      void questionText.offsetWidth;
+      void optionsContainer.offsetWidth;
+
+      // Update question text
+      questionText.textContent = questions[index].text;
+      questionText.style.animation = 'fadeUp 0.5s forwards';
+
+      // Create options
+      optionsContainer.innerHTML = "";
+      optionsContainer.style.animation = 'fadeUp 0.5s forwards';
+      
+      questions[index].options.forEach((option) => {
+        const label = document.createElement("label");
+        const input = document.createElement("input");
+        input.type = 'radio';
+        input.name = `question${index}`;
+        input.value = option;
+        input.required = true;
+        input.checked = answers[index] === option;
+        
+        input.addEventListener("change", () => {
+          answers[index] = option;
+          questionList.children[index].classList.add("answered");
+        });
+
+        label.appendChild(input);
+        label.append(` ${option}`);
+        optionsContainer.appendChild(label);
+      });
+
+      nextBtn.style.display = (index === questions.length - 1) ? "none" : "inline-block";
+    }
+
+    function startTimer(seconds) {
+      let remaining = seconds;
+      timerInterval = setInterval(() => {
+        const min = Math.floor(remaining / 60);
+        const sec = remaining % 60;
+        timerDiv.textContent = `Time Left: ${min}:${sec.toString().padStart(2, '0')}`;
+        
+        if (--remaining < 0) {
+          clearInterval(timerInterval);
+          submitAnswers();
+        }
+      }, 1000);
+    }
+
+    // Replace the existing submitAnswers function with this:
+async function submitAnswers() {
+  clearInterval(timerInterval);
+  
+  try {
+    const response = await fetch('/blogbattle/result/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': getCSRFToken(),
+      },
+      body: JSON.stringify(answers)
+    });
+
+    // Add error handling for HTTP status codes
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`Server error: ${response.status} - ${errorText}`);
+    }
+
+    const result = await response.json();
+    if (result.score !== undefined) {
+      window.location.href = `/blogbattle/result_page/?score=${result.score}&total=${result.total}`;
+    }
+  } catch (error) {
+    alert("Error submitting answers: " + error.message);
+  }
+}
+
+// Add this helper function
+function getCSRFToken() {
+  return document.querySelector('[name=csrfmiddlewaretoken]')?.value || '';
+}
+
+    function previousQuestion() {
+      if (currentQuestion > 0) displayQuestion(currentQuestion - 1);
+    }
+
+    function nextQuestion() {
+      if (currentQuestion < questions.length - 1) displayQuestion(currentQuestion + 1);
+    }
+
+    // Start the quiz
+    initializeQuiz();
+  </script>
+</body>
+</html>
