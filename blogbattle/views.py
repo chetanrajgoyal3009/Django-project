@@ -32,6 +32,11 @@ def start(request):
 
 def startquiz(request):
     quiz_data = request.session.get('quiz_data', [])
+    if 'user_answers' in request.session:
+        del request.session['user_answers']
+    return render(request, 'class.html', {
+        'quiz_data': json.dumps(quiz_data)  # Serialize for JavaScript
+    })# Now correctly populated
     return render(request, 'class.html', {'quiz_data': quiz_data})
 
 genai.configure(api_key='AIzaSyDY0Gu2NWWORP1peDYzoLQPfUiL7eQMlfs')
@@ -81,7 +86,8 @@ def generate_quiz(request):
         qtype = data.get('type')
         
         questions = generate_quiz_with_gemini(num, category, difficulty, qtype)
-        print(questions)
+        request.session['quiz_data'] = questions  # Add this line
+        request.session.modified = True  # Ensure session is saved
         return JsonResponse({'questions': questions})
     return JsonResponse({'error': 'Invalid request'}, status=400)
 
@@ -89,14 +95,12 @@ def generate_quiz(request):
 def result_view(request):
     if request.method == "POST":
         try:
-            # Parse JSON data
             submitted_answers = json.loads(request.body)
             questions = request.session.get('quiz_data', [])
             
             if not questions:
                 return JsonResponse({'error': 'No quiz data found'}, status=400)
 
-            # Calculate score
             score = sum(
                 1 for i, ans in enumerate(submitted_answers) 
                 if i < len(questions) and ans == questions[i]['answer']
@@ -104,9 +108,10 @@ def result_view(request):
             total = len(questions)
             percentage = round((score/total)*100, 2) if total > 0 else 0
 
-            # Save to leaderboard
+            # Save to leaderboard only if authenticated
             if request.user.is_authenticated:
                 Leaderboard.objects.create(
+                    user=request.user,
                     username=request.user.username,
                     score=score,
                     total=total
@@ -120,8 +125,6 @@ def result_view(request):
             
         except Exception as e:
             return JsonResponse({'error': str(e)}, status=500)
-    
-    return JsonResponse({'error': 'Invalid request method'}, status=405)
     
     
 def result_page_view(request):

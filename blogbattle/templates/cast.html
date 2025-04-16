@@ -1,187 +1,171 @@
-  <!DOCTYPE html>
-  <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Custom Quiz</title>
-    <style>
-      body {
-        margin: 0;
-        padding: 0;
-        font-family: Arial, sans-serif;
-        background: linear-gradient(to bottom right, #2a0f18, #000000);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        color: white;
-      }
+<!DOCTYPE html>
+<html lang="en">
 
-      .container {
-        background-color: #121212;
-        padding: 30px;
-        border-radius: 15px;
-        box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
-        width: 350px;
-      }
-
-      h2 {
-        text-align: center;
-        margin-bottom: 10px;
-      }
-
-      .tip {
-        color: #ff4d4d;
-        text-align: center;
-        margin-bottom: 20px;
-      }
-
-      .dark-box {
-        background-color: #1e1e1e;
-        padding: 20px;
-        border-radius: 10px;
-      }
-
-      .section {
-        margin-bottom: 20px;
-      }
-
-      label {
-        display: block;
-        margin-bottom: 8px;
-        font-weight: bold;
-      }
-
-      input[type="text"] {
-        width: 100%;
-        padding: 8px;
-        margin-bottom: 10px;
-        border-radius: 5px;
-        border: none;
-        background-color: #2a2a2a;
-        color: white;
-        margin-top: 5px;
-      }
-
-      input[type="range"] {
-        width: 100%;
-        margin-bottom: 10px;
-      }
-
-      .question-dialog {
-        background-color: #2a2a2a;
-        padding: 8px 12px;
-        border-radius: 5px;
-        text-align: center;
-        width: fit-content;
-        margin: 0 auto 10px auto;
-      }
-
-      .radio-group {
-        display: flex;
-        justify-content: space-between;
-        margin-top: 10px;
-      }
-
-      .radio-group label {
-        font-weight: normal;
-      }
-
-      button {
-        width: 100%;
-        padding: 10px;
-        background-color: white;
-        color: black;
-        font-weight: bold;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <h2>Quiz Battle</h2>
-      <p class="tip">Tip: You must define a category to continue!</p>
-
-      <div class="dark-box">
-        <div class="section">
-          <label>Any Category of Your Choice 😁</label>
-          <small>Just Describe us about the Category we will create for you 🤖</small>
-        </div>
-
-        <div class="section">
-          <label for="questions">Number of Questions</label>
-          <input type="range" id="questions" min="1" max="20" value="5" oninput="updateValue(this.value)">
-          <div id="question-count" class="question-dialog">5</div>
-        </div>
-
-        <div class="section">
-          <label for="category">Category</label>
-          <input type="text" id="category" placeholder="Describe about your Category🤓" value="{{ category }}">
-        </div>
-
-        <div class="section">
-          <label>Choose Difficulty</label>
-          <div class="radio-group">
-            <label><input type="radio" name="difficulty" value="easy" checked> Easy</label>
-            <label><input type="radio" name="difficulty" value="medium"> Medium</label>
-            <label><input type="radio" name="difficulty" value="hard"> Hard</label>
-          </div>
-        </div>
-
-        <div class="section">
-          <label>Type</label>
-          <div class="radio-group">
-            <label><input type="radio" name="type" value="mcq" checked> MCQ</label>
-            <label><input type="radio" name="type" value="truefalse"> True/False</label>
-          </div>
-        </div>
-
-        <button onclick="startQuiz()">Start Quiz</button>
-      </div>
-    </div>
-
-    <script>
-      function updateValue(val) {
-        document.getElementById('question-count').innerText = val;
-      }
-
-      function startQuiz() {
-    const category = document.getElementById("category").value;
-    if (!category.trim()) {
-      alert("Please define a category to continue!");
-      return;
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Custom Quiz</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom right, #2a0f18, #000000);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: white;
     }
 
-    const questions = document.getElementById("questions").value;
-    const difficulty = document.querySelector('input[name="difficulty"]:checked').value;
-    const type = document.querySelector('input[name="type"]:checked').value;
+    .container {
+      background-color: #121212;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+      width: 350px;
+    }
 
-    const quizConfig = {
-      category,
-      numQuestions: parseInt(questions),
-      difficulty,
-      type
-    };
+    h2 {
+      text-align: center;
+      margin-bottom: 10px;
+    }
 
-    fetch("/blogbattle/generate-quiz/", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(quizConfig)
-  })
-  .then(response => response.json())
-  .then(data => {
-    localStorage.setItem("quizQuestions", JSON.stringify(data.questions));
-    window.location.href = "/blogbattle/quiz/";
-  })
-  .catch(err => {
-    console.error("Error generating quiz:", err);
-    alert("Failed to generate quiz. Please try again.");
-  });
+    .tip {
+      color: #ff4d4d;
+      text-align: center;
+      margin-bottom: 20px;
+    }
 
-  }
+    .dark-box {
+      background-color: #1e1e1e;
+      padding: 20px;
+      border-radius: 10px;
+    }
 
-    </script>
-  </body>
-  </html>
+    .section {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      border: none;
+      background-color: #2a2a2a;
+      color: white;
+      margin-top: 5px;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+
+    .question-dialog {
+      background-color: #2a2a2a;
+      padding: 8px 12px;
+      border-radius: 5px;
+      text-align: center;
+      width: fit-content;
+      margin: 0 auto 10px auto;
+    }
+
+    .radio-group {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+    }
+
+    .radio-group label {
+      font-weight: normal;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: white;
+      color: black;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h2>Quiz Battle</h2>
+    <p class="tip">Tip: You must define a category to continue!</p>
+
+    <div class="dark-box">
+      <div class="section">
+        <label>Any Category of Your Choice 😁</label>
+        <small>Just Describe us about the Category we will create for you 🤖</small>
+      </div>
+
+      <div class="section">
+        <label for="questions">Number of Questions</label>
+        <input type="range" id="questions" min="1" max="20" value="5" oninput="updateValue(this.value)">
+        <div id="question-count" class="question-dialog">5</div>
+      </div>
+
+      <div class="section">
+        <label for="category">Category</label>
+        <input type="text" id="category" placeholder="Describe about your Category🤓" value="{{ category }}">
+      </div>
+
+      <div class="section">
+        <label>Choose Difficulty</label>
+        <div class="radio-group">
+          <label><input type="radio" name="difficulty" value="easy" checked> Easy</label>
+          <label><input type="radio" name="difficulty" value="medium"> Medium</label>
+          <label><input type="radio" name="difficulty" value="hard"> Hard</label>
+        </div>
+      </div>
+
+      <div class="section">
+        <label>Type</label>
+        <div class="radio-group">
+          <label><input type="radio" name="type" value="mcq" checked> MCQ</label>
+          <label><input type="radio" name="type" value="truefalse"> True/False</label>
+        </div>
+      </div>
+
+      <button onclick="startQuiz()">Start Quiz</button>
+    </div>
+  </div>
+
+  <script>
+    function updateValue(val) {
+      document.getElementById('question-count').innerText = val;
+    }
+  
+    function startQuiz() {
+      const category = document.getElementById("category").value.trim();
+      if (!category) {
+        alert("Please define a category to continue!");
+        return;
+      }
+  
+      const num = parseInt(document.getElementById("questions").value);
+      const difficulty = document.querySelector('input[name="difficulty"]:checked').value;
+      const typeRaw = document.querySelector('input[name="type"]:checked').value;
+      const type = typeRaw === "mcq" ? "multiple" : "boolean";
+  
+      const url = `https://brain-brawl.vercel.app/quiz/custom/blogbattle?num=${num}&category=${encodeURIComponent(category)}&difficulty=${difficulty}&type=${type}`;
+      window.location.href = url;
+    }
+  </script>
+  
+</body>
+
+</html>
