@@ -9,6 +9,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ profile.name }} | Profile</title>
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
   <style>
     * {
       background-color: rgb(17 24 39 / var(--tw-bg-opacity, 1));
@@ -342,21 +343,19 @@
               <div class="edit">
                   
                 <a href="{% url 'update_blog' post.id %}">
-                  <button type="button"
-                    class="text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-800">Edit</button></a>
+                  <button type="button">
+                  <i class="fa-solid fa-pen-to-square fa-xl" style="color: #14bd4f;"></i></a>
                   
                 <a href="{% url 'delete_blog' post.id %}"
-                  onclick="return confirm('Are you sure you want to delete this blog?');"
-                  class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
-                  Delete</a>
+                  onclick="return confirm('Are you sure you want to delete this blog?');">
+                  <i class="fa-solid fa-trash-can fa-xl" style="color: #dc0909;"></i></a>
             
                 
               </div>
               <div class="readmore">
                 <a href="{% url 'blog_detail' post.id %}">
-                  <button type="button"
-                    class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800">Read
-                    More</button></a>
+                  <button type="button">
+                  <i class="fa-solid fa-book-open fa-xl" style="color: #246ef0;"></i></button></a>
               </div>
 
             </div>

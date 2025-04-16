@@ -205,21 +205,6 @@
                     <img src="#" alt="No image available">
                     {% endif %}
                 </div>
-                <div class="post-icons">
-                    <form action="{% url 'like_post' post.id %}" method="POST">
-                        {% csrf_token %}
-                        <button type="submit" style="border: none; background: none; cursor: pointer;">
-                            {% if post.id in liked_posts %}
-                                <img src="{% static 'images/heart-filled.png' %}" alt="Unlike">
-                            {% else %}
-                                <img src="{% static 'images/heart.png' %}" alt="Like">
-                            {% endif %}
-                        </button>
-                        <span>{{ post.likes.count }}</span>
-                    </form>
-                
-                    <img src="{% static 'images/chat.png' %}" alt="Comment">
-                </div>
                 <div class="post-title">
                     <h2>{{ post.title }}</h2>
                 </div>
@@ -236,33 +221,6 @@
             {% endfor %}
         </div>
     </main>
-
-
-    <script>
-        document.querySelectorAll(".like-btn").forEach(button => {
-            button.addEventListener("click", function () {
-                const postId = this.getAttribute("data-post-id");
-                const likeCount = document.getElementById(like-count-${postId});
-                const likeIcon = this.querySelector(".like-icon");
-
-                fetch(/like/${postId}/, {
-                    method: "POST",
-                    headers: {
-                        "X-Requested-With": "XMLHttpRequest",
-                        "X-CSRFToken": "{{ csrf_token }}"
-                    }
-                })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.likes !== undefined) {
-                            likeCount.innerText = data.likes;
-                            likeIcon.classList.toggle("liked", data.liked);
-                        }
-                    })
-                    .catch(error => console.error("Error:", error));
-            });
-        });
-    </script>
 </body>
 
 </html>

@@ -13,7 +13,7 @@ def welcome(request):
 
 
 
-@csrf_exempt
+
 def start(request):
     if request.method == 'POST':
         num = int(request.POST['num'])
@@ -25,7 +25,10 @@ def start(request):
         request.session['quiz_data'] = questions
         return redirect('class_quiz')
 
-    return render(request, 'cast.html')
+    # GET method — extract category from query params and pass it to the template
+    category_from_blog = request.GET.get('category', '')
+
+    return render(request, 'cast.html', {'category': category_from_blog})
 
 def startquiz(request):
     quiz_data = request.session.get('quiz_data', [])
