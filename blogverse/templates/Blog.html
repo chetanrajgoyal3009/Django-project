@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+    {% extends 'base.html' %}
 {% load static %}
 
 {% block content %}
@@ -191,7 +191,12 @@
             {% for post in posts %}
             <div class="post-container">
                 <div class="profile-details">
-                    <img src="{{ post.profile.profile_image.url }}" alt="Profile Picture">
+                    {% if user.profile.profile_image %}
+                            <img src="{{ user.profile.profile_image.url }}" alt="Profile Image">
+                    {% else %}
+                            <img src="/static/default_profile.png" alt="Default Profile">
+                    {% endif %}
+
                     <div>
                         <h2>{{ post.user.name }}</h2>
                         <h4>{{ post.created_at|date:"F d, Y, h:i A" }}</h4>
