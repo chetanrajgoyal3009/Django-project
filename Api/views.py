@@ -14,7 +14,7 @@ from django.urls import reverse
 logger = logging.getLogger(__name__)
 
 
-FLASK_API_URL = 'https://blog-verse.up.railway.app/api'
+FLASK_API_URL = 'http://127.0.0.1:5000/api'
 
 
 @login_required
