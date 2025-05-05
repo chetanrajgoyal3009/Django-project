@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>User List</h2>
+<a href="{% url 'api:user-add-view' %}" class="btn btn-primary mb-3">Add User</a>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>ID</th><th>Name</th><th>Email</th><th>Profile Picture</th><th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.id }}</td>
+            <td>{{ user.name }}</td>
+            <td>{{ user.email }}</td>
+            <td>
+                {% if user.profile_picture %}
+                    <img src="data:image/jpeg;base64,{{ user.profile_picture }}" width="40" height="40" />
+                {% else %}
+                    N/A
+                {% endif %}
+            </td>
+            <td>
+                <a href="{% url 'api:user-edit-view' user.id %}" class="btn btn-sm btn-warning">Edit</a>
+                <a href="{% url 'api:user-delete-view' user.id %}" class="btn btn-sm btn-danger">Delete</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="5">No users found.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
+
+
+

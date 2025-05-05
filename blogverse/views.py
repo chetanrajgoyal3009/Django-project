@@ -204,7 +204,7 @@ def blog_list(request):
     else:
         posts = BlogPost.objects.all().order_by('-created_at')
 
-    # ✅ Attach profile to each post
+   
     for post in posts:
         post.profile = Profile.objects.filter(user=post.user).first()
 

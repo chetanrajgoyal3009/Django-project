@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>{% if user %}Edit{% else %}Add{% endif %} User</h2>
+<form method="post">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label>Name</label>
+        <input type="text" name="name" class="form-control" value="{{ user.name|default_if_none:'' }}">
+    </div>
+    <div class="mb-3">
+        <label>Email</label>
+        <input type="email" name="email" class="form-control" value="{{ user.email|default_if_none:'' }}">
+    </div>
+    <div class="mb-3">
+        <label>Profile Picture (Base64 string)</label>
+        <input type="text" name="profile_picture" class="form-control" value="{{ user.profile_picture|default_if_none:'' }}">
+    </div>
+    <button type="submit" class="btn btn-success">{% if user %}Update{% else %}Add{% endif %}</button>
+    <a href="{% url 'api:user-list-view' %}" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}
+
+
+
