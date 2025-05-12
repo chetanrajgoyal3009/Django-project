@@ -227,61 +227,70 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      // Function to handle dropdown toggle
-      function setupDropdown(buttonId, dropdownId) {
-        const button = document.getElementById(buttonId);
-        const dropdown = document.getElementById(dropdownId);
-        
-        if (!button || !dropdown) return;
+  // Dropdown setup
+  function setupDropdown(buttonId, dropdownId) {
+    const button = document.getElementById(buttonId);
+    const dropdown = document.getElementById(dropdownId);
+    
+    if (!button || !dropdown) return;
 
-        button.addEventListener('click', function(e) {
-          e.stopPropagation();
-          const isExpanded = this.getAttribute('aria-expanded') === 'true';
-          this.setAttribute('aria-expanded', !isExpanded);
-          dropdown.classList.toggle('hidden');
+    button.addEventListener('click', function(e) {
+      e.stopPropagation();
+      const isExpanded = this.getAttribute('aria-expanded') === 'true';
+      this.setAttribute('aria-expanded', !isExpanded);
+      dropdown.classList.toggle('hidden');
 
-          // Close other open dropdowns
-          document.querySelectorAll('.dropdown-menu').forEach(dd => {
-            if (dd.id !== dropdownId && !dd.classList.contains('hidden')) {
-              dd.classList.add('hidden');
-              const btn = document.querySelector(`[aria-controls="${dd.id}"]`);
-              if (btn) btn.setAttribute('aria-expanded', 'false');
-            }
-          });
-
-          if (!isExpanded) {
-            document.addEventListener('click', closeAllDropdowns);
-          }
-        });
-      }
-
-      // Function to close all dropdowns
-      function closeAllDropdowns(event) {
-        const dropdowns = document.querySelectorAll('.dropdown-menu');
-        let shouldClose = true;
-        
-        // Check if click was inside any dropdown or its button
-        dropdowns.forEach(dropdown => {
-          const button = document.querySelector(`[aria-controls="${dropdown.id}"]`);
-          if (dropdown.contains(event.target) || (button && button.contains(event.target))) {
-            shouldClose = false;
-          }
-        });
-
-        if (shouldClose) {
-          dropdowns.forEach(dropdown => {
-            dropdown.classList.add('hidden');
-            const button = document.querySelector(`[aria-controls="${dropdown.id}"]`);
-            if (button) button.setAttribute('aria-expanded', 'false');
-          });
-          document.removeEventListener('click', closeAllDropdowns);
+      // Close other open dropdowns
+      document.querySelectorAll('.dropdown-menu').forEach(dd => {
+        if (dd.id !== dropdownId && !dd.classList.contains('hidden')) {
+          dd.classList.add('hidden');
+          const btn = document.querySelector(`[aria-controls="${dd.id}"]`);
+          if (btn) btn.setAttribute('aria-expanded', 'false');
         }
-      }
+      });
 
-      // Initialize dropdowns
-      setupDropdown('user-menu-button', 'user-dropdown');
-      setupDropdown('admin-menu-button', 'admin-dropdown');
+      if (!isExpanded) {
+        document.addEventListener('click', closeAllDropdowns);
+      }
     });
+  }
+
+  function closeAllDropdowns(event) {
+    const dropdowns = document.querySelectorAll('.dropdown-menu');
+    let shouldClose = true;
+    
+    dropdowns.forEach(dropdown => {
+      const button = document.querySelector(`[aria-controls="${dropdown.id}"]`);
+      if (dropdown.contains(event.target) || (button && button.contains(event.target))) {
+        shouldClose = false;
+      }
+    });
+
+    if (shouldClose) {
+      dropdowns.forEach(dropdown => {
+        dropdown.classList.add('hidden');
+        const button = document.querySelector(`[aria-controls="${dropdown.id}"]`);
+        if (button) button.setAttribute('aria-expanded', 'false');
+      });
+      document.removeEventListener('click', closeAllDropdowns);
+    }
+  }
+
+  // Initialize dropdowns
+  setupDropdown('user-menu-button', 'user-dropdown');
+  setupDropdown('admin-menu-button', 'admin-dropdown');
+
+  // ✅ Add mobile menu toggle here
+  const menuToggleButton = document.querySelector('[data-collapse-toggle="navbar-user"]');
+  const mobileMenu = document.getElementById('navbar-user');
+
+  if (menuToggleButton && mobileMenu) {
+    menuToggleButton.addEventListener('click', function () {
+      mobileMenu.classList.toggle('hidden');
+    });
+  }
+});
+
   </script>
 
 </body>
