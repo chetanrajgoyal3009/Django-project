@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-lo(u4p(8w9$4+$bf4@hf+le!1sbx$539u4&0-am(jjdav5)qic
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['blogversee.up.railway.app', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['django-project-1-4ozx.onrender.com', '127.0.0.1', 'localhost']
 CSRF_TRUSTED_ORIGINS = ['https://blogversee.up.railway.app']
 
 
